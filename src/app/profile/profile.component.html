@@ -1,0 +1,176 @@
+<section id="basic-form-layouts">
+	<div class="row text-left">
+		<div class="col-sm-12">
+			<div class="content-header">Profile</div>
+		</div>
+	</div>
+</section>
+
+<section id="user-profile">
+	<div class="row">
+		<div class="col-12">
+			<div class="card profile-with-cover">
+				<div class="media profil-cover-details row">
+					<div class="col-5">
+					</div>
+					<div class="col-2">
+						<div class="align-self-center halfway-fab text-center">
+							<a class="profile-image">
+								<img src="assets/img/portrait/avatars/avatar-08.png" class="rounded-circle img-border gradient-summer width-100"
+								 alt="Card image">
+							</a>
+						</div>
+					</div>
+					<div class="col-5">
+					</div>
+				</div>
+				<div class="profile-section">
+					<div class="row">
+						<div class="col-lg-5 col-md-5 ">
+						</div>
+						<div class="col-lg-2 col-md-2 text-center">
+							<!-- <span class="font-medium-2 text-uppercase">{{name}} {{sname}}</span> -->
+							<p class="font-small-5">{{name}} {{sname}}</p>
+						</div>
+						<div class="col-lg-5 col-md-5">
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-2 col-md-0"></div>
+						<div class="col-lg-8 col-md-12">
+							<div class="card-body">
+								<div class="px-3">
+									<form class="form" #f="ngForm">
+										<div class="form-body">
+											<h4 class="form-section"><i class="ft-user"></i> Personal Infomation</h4>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="name">Name</label>
+														<input type="text" id="name" class="form-control" name="name" [(ngModel)]="name" required>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="sname">Surname</label>
+														<input type="text" id="sname" class="form-control" name="sname" [(ngModel)]="sname" required>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="email">E-mail</label>
+														<input type="text" id="email" class="form-control" name="email" [(ngModel)]="email" required disabled>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="phone">Phone</label>
+														<input type="text" id="phone" class="form-control" name="phone" [(ngModel)]="phone" required>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for="address">Address</label>
+														<input type="text" id="address" class="form-control" name="address" [(ngModel)]="address" required>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for="city">City</label>
+														<input type="text" id="city" class="form-control" name="city" [(ngModel)]="city" required>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="postal">Postal Code</label>
+														<input type="text" id="postal" class="form-control" name="postal" [(ngModel)]="postal" required>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="country">Country</label>
+														<input type="text" id="country" class="form-control" name="country" [(ngModel)]="country" required>
+													</div>
+												</div>
+											</div>
+											<h4 class="form-section"><i class="icon-home"></i> Bank Infomation</h4>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="name">Bank Name</label>
+														<input type="text" id="bname" class="form-control" name="bname" [(ngModel)]="bname" required>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="sname">IBAN</label>
+														<input type="text" id="iban" class="form-control" name="iban" [(ngModel)]="iban" required>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<div class="form-group">
+														<label for="sname">Paypal Address</label>
+														<input type="text" id="ppaddress" class="form-control" name="ppaddress" [(ngModel)]="ppaddress" required>
+													</div>
+												</div>
+											</div>
+											<h4 class="form-section"><i class="icon-speech"></i> Social Media Information</h4>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Twitter Link</label>
+														<div class="position-relative has-icon-right">
+															<input type="text" class="form-control" id="tlink" name="tlink" placeholder="https://twitter.com/" [(ngModel)]="tlink">
+															<div class="form-control-position">
+																<i class="ft-twitter info" style="cursor: pointer" (click)="onTwitter()"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-12">
+													<div class="form-group">
+														<label>Facebook Link</label>
+														<div class="position-relative has-icon-right">
+															<input type="text" class="form-control" id="flink" name="flink" placeholder="https://facebook.com/" [(ngModel)]="flink">
+															<div class="form-control-position">
+																<i class="ft-facebook primary" style="cursor: pointer" (click)="onFacebook()"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="class col-md-12">
+													<div class="form-group">
+														<label>Instagram Link</label>
+														<div class="position-relative has-icon-right">
+															<input type="text" class="form-control" id="ilink" name="ilink" placeholder="https://instagram.com/" [(ngModel)]="ilink">
+															<div class="form-control-position">
+																<i class="ft-instagram warning" style="cursor: pointer" (click)="onInstagram()"></i>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-actions right">
+											<button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
+												<i class="ft-x"></i> Cancel
+											</button>
+											<button type="button" class="btn btn-raised btn-primary" (click)="onSave()" [disabled]="!f.valid">
+												<i class="fa fa-check-square-o"></i> Save
+											</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-0"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
