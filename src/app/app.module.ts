@@ -19,6 +19,9 @@ import { ApiService, RequestInterceptor } from './shared/api/api.service';
 
 import * as $ from 'jquery';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ChartistModule } from 'ng-chartist';
 
 
 @NgModule({
@@ -26,7 +29,9 @@ import { LoginComponent } from './login/login.component';
         AppComponent,
         PrivateContentLayoutComponent,
         PublicContentLayoutComponent,
-        LoginComponent
+        LoginComponent,
+        DashboardComponent,
+        ProfileComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -35,7 +40,8 @@ import { LoginComponent } from './login/login.component';
         FormsModule,
         NgbModule.forRoot(),
         HttpClientModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        ChartistModule
     ],
     providers: [
         AuthService,
