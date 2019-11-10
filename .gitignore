@@ -9,7 +9,7 @@
 /node_modules
 
 #dump
-package-lock.json
+/package-lock.json
 
 # styles and images
 /src/assets/sass
