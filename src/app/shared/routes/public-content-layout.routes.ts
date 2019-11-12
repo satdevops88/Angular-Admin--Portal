@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from 'app/login/login.component';
+import { AdvertisementComponent } from 'app/advertisement/advertisement.component';
 
 //Route for content layout with sidebar, navbar and footer
 export const PUBLIC_CONTENT_ROUTES: Routes = [
@@ -25,10 +26,13 @@ export const PUBLIC_CONTENT_ROUTES: Routes = [
     loadChildren: './register/register.module#RegisterModule'
   },
   {
+    path: 'advertisement',
+    component: AdvertisementComponent
+  },
+  {
     path: 'not-found',
     loadChildren: './notfound/notfound.module#NotFoundModule'
     // loadChildren: './field-campaign/field-campaign.module#FieldCampaignModule'
-
   },
   {
     path: '**',

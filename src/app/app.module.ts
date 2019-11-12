@@ -22,6 +22,15 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChartistModule } from 'ng-chartist';
+import { AdvertisementComponent } from './advertisement/advertisement.component';
+import { UserPostComponent } from './user-post/user-post.component';
+import { NotificationComponent } from './notification/notification.component';
+import { ForumManagementComponent } from './forum-management/forum-management.component';
+import { NewsManagementComponent } from './news-management/news-management.component';
+import { DirectMessageComponent } from './direct-message/direct-message.component';
+import { UserManagementComponent } from './user-management/user-management.component';
+import { RoleManagementComponent } from './role-management/role-management.component';
+import { EventManagementComponent } from './event-management/event-management.component';
 
 
 @NgModule({
@@ -31,7 +40,16 @@ import { ChartistModule } from 'ng-chartist';
         PublicContentLayoutComponent,
         LoginComponent,
         DashboardComponent,
-        ProfileComponent
+        AdvertisementComponent,
+        NotificationComponent,
+        ProfileComponent,
+        UserPostComponent,
+        ForumManagementComponent,
+        NewsManagementComponent,
+        DirectMessageComponent,
+        UserManagementComponent,
+        RoleManagementComponent,
+        EventManagementComponent
     ],
     imports: [
         BrowserAnimationsModule,
