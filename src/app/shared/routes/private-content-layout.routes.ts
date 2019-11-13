@@ -7,7 +7,6 @@ import { ForumManagementComponent } from 'app/forum-management/forum-management.
 import { DirectMessageComponent } from 'app/direct-message/direct-message.component';
 import { AdvertisementComponent } from 'app/advertisement/advertisement.component';
 import { NewsManagementComponent } from 'app/news-management/news-management.component';
-import { UserManagementComponent } from 'app/user-management/user-management.component';
 import { RoleManagementComponent } from 'app/role-management/role-management.component';
 import { EventManagementComponent } from 'app/event-management/event-management.component';
 
@@ -47,7 +46,7 @@ export const PRIVATE_CONTENT_ROUTES: Routes = [
   },
   {
     path: 'user-management',
-    component: UserManagementComponent
+    loadChildren: './user-management/user-management.module#UserManagementModule'
   },
   {
     path: 'role-management',

@@ -6,7 +6,10 @@ export const ROUTES: RouteInfo[] = [
         path: '/dashboard', title: 'Home Dashboard', icon: 'ft-layout', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
-        path: '/notification', title: 'Notification', icon: 'ft-clipboard', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+        path: '', title: 'User Mangement', icon: 'ft-user', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+            { path: '/user-management/users', title: 'List Users', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/user-management/admins', title: 'List Admins', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+        ]
     },
     {
         path: '/user-post', title: 'User Post Mangement', icon: 'ft-edit', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
@@ -21,7 +24,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/direct-message', title: 'Direct Messages', icon: 'ft-message-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
-        path: '/user-management', title: 'User Mangement', icon: 'ft-user', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+        path: '/notification', title: 'Notification', icon: 'ft-clipboard', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
         path: '/role-management', title: 'Role Mangement', icon: 'ft-layers', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
@@ -29,4 +32,5 @@ export const ROUTES: RouteInfo[] = [
     {
         path: '/event-management', title: 'Event Management', icon: 'ft-align-justify', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     }
+
 ];

@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header card-header-button">
+        <div>
+          <h4 class="card-title">Admins List</h4>
+        </div>
+        <button type="button" class="btn btn-primary btn-round btn-raised" (click)="onAddAdmin()">
+          Add Admin User</button>
+      </div>
+      <div class="card-body">
+        <div class="card-block">
+          <ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
+            [rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows">
+            <ngx-datatable-column name="ID" [width]="50">
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                {{rowIndex + 1}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Name">
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Username"></ngx-datatable-column>
+            <ngx-datatable-column name="Joined"></ngx-datatable-column>
+            <ngx-datatable-column name="Actions">
+              <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                <button type="button" class="btn btn-outline-primary btn-round" (click)="onUpdate(rowIndex)">
+                  Update</button>
+                <button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
+                  (click)="onDelete(rowIndex)">Delete</button>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

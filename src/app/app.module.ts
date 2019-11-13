@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
 import { PublicContentLayoutComponent } from "./layouts/public-content/public-content-layout.component";
@@ -28,7 +29,6 @@ import { NotificationComponent } from './notification/notification.component';
 import { ForumManagementComponent } from './forum-management/forum-management.component';
 import { NewsManagementComponent } from './news-management/news-management.component';
 import { DirectMessageComponent } from './direct-message/direct-message.component';
-import { UserManagementComponent } from './user-management/user-management.component';
 import { RoleManagementComponent } from './role-management/role-management.component';
 import { EventManagementComponent } from './event-management/event-management.component';
 
@@ -47,7 +47,6 @@ import { EventManagementComponent } from './event-management/event-management.co
         ForumManagementComponent,
         NewsManagementComponent,
         DirectMessageComponent,
-        UserManagementComponent,
         RoleManagementComponent,
         EventManagementComponent
     ],
@@ -59,7 +58,8 @@ import { EventManagementComponent } from './event-management/event-management.co
         NgbModule.forRoot(),
         HttpClientModule,
         ToastrModule.forRoot(),
-        ChartistModule
+        ChartistModule,
+        NgxDatatableModule
     ],
     providers: [
         AuthService,

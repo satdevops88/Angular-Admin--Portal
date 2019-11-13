@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
 /* You can add global styles to this file, and also import other style files */
 
 /* @import url("assets/css/bootstrap.min.css"); */
+
 /* @import url("../src/assets/css/prism.min.css");
 @import url("../src/assets/css/sweetalert2.min.css");
 @import url("../src/assets/css/bootstrap-timepicker.min.css");
@@ -15,7 +17,9 @@
 @import url("../src/assets/css/demo.css"); */
 
 @import "~bootstrap/dist/css/bootstrap.css";
-
-#toast-container > div {
-    opacity:1;
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+#toast-container>div {
+    opacity: 1;
 }

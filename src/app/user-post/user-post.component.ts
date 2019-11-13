@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserPostComponent {
 
+
   //-- CONSTRUCTORS
   /**
    * @description Default constructor.
