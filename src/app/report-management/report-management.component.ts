@@ -4,24 +4,24 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-list-admins',
-  templateUrl: './list-admins.component.html',
-  styleUrls: ['./list-admins.component.scss']
+  selector: 'app-report-management',
+  templateUrl: './report-management.component.html',
+  styleUrls: ['./report-management.component.scss']
 })
-export class ListAdminsComponent {
+export class ReportManagementComponent {
 
   rows = [
-    { name: 'Michael', username: 'michael', joined: '1 January 2019', actions: '' },
-    { name: 'Shamnex', username: 'shamnex', joined: '4 April 2019', actions: '' },
-    { name: 'Sonxai', username: 'sonxai', joined: '11 November 2019', actions: '' },
+    // { node: 'Sngine', type: 'michael', user: "Rotary Power", time: "5 April 2019", actions: "" },
   ];
   temp = [];
   columns = [
     { name: 'ID' },
-    { name: 'Name' },
-    { name: 'Username' },
-    { name: 'Joined' },
-    { name: 'Actions' }
+    { name: 'Node' },
+    { name: 'Type' },
+    { name: 'Reported By' },
+    { name: 'Reported Count' },
+    { name: 'Time' },
+    { name: 'Actions' },
   ];
 
   constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
@@ -42,7 +42,7 @@ export class ListAdminsComponent {
   }
 
   onDelete(rowIndex) {
-    if (confirm('Are you sure to delete ' + this.rows[rowIndex].name + ' Admin User ?')) {
+    if (confirm('Are you sure to delete Admin User ?')) {
       this.toastr.success('Deleted Admin User Successfully', 'Success');
     }
   }

@@ -31,6 +31,7 @@ import { NewsManagementComponent } from './news-management/news-management.compo
 import { DirectMessageComponent } from './direct-message/direct-message.component';
 import { RoleManagementComponent } from './role-management/role-management.component';
 import { EventManagementComponent } from './event-management/event-management.component';
+import { ReportManagementComponent } from './report-management/report-management.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { EventManagementComponent } from './event-management/event-management.co
         NewsManagementComponent,
         DirectMessageComponent,
         RoleManagementComponent,
-        EventManagementComponent
+        EventManagementComponent,
+        ReportManagementComponent
     ],
     imports: [
         BrowserAnimationsModule,

@@ -1,8 +1,17 @@
+<section id="basic-form-layouts">
+  <div class="row text-left">
+    <div class="col-sm-12">
+      <div class="content-header">User List</div>
+    </div>
+  </div>
+</section>
+
 <div class="row">
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">User List</h4>
+        <input type="text" style="padding:6px;margin:15px auto;width:30%;" placeholder="Type to filter the Name ..."
+          (keyup)="updateFilter($event)" />
       </div>
       <div class="card-body">
         <div class="card-block">
@@ -18,17 +27,14 @@
             <ngx-datatable-column name="Username"></ngx-datatable-column>
             <ngx-datatable-column name="Joined"></ngx-datatable-column>
             <ngx-datatable-column name="Activated">
-              <ng-template let-value="value" ngx-datatable-cell-template>
-                <span *ngIf="value" class="badge badge-pill badge-lg badge-success">Yes</span>
-                <span *ngIf="!value" class="badge badge-pill badge-lg badge-danger">No</span>
+              <ng-template let-column="column" ngx-datatable-header-template>
+                Blocked/Unblocked
               </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Actions">
               <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-                <button type="button" class="btn btn-outline-primary btn-round" (click)="onEdit(rowIndex)">
-                  Edit</button>
-                <button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
-                  (click)="onDelete(rowIndex)">Delete</button>
+                <span *ngIf="value" class="badge badge-pill badge-lg badge-success" style="cursor: pointer;"
+                  (click)="onBlock(rowIndex)">Unblocked</span>
+                <span *ngIf="!value" class="badge badge-pill badge-lg badge-danger" style="cursor: pointer;"
+                  (click)="onUnblock(rowIndex)">Blocked</span>
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>

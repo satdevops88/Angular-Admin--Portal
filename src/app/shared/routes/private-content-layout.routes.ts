@@ -9,6 +9,7 @@ import { AdvertisementComponent } from 'app/advertisement/advertisement.componen
 import { NewsManagementComponent } from 'app/news-management/news-management.component';
 import { RoleManagementComponent } from 'app/role-management/role-management.component';
 import { EventManagementComponent } from 'app/event-management/event-management.component';
+import { ReportManagementComponent } from 'app/report-management/report-management.component';
 
 //Route for content layout with sidebar, navbar and footer
 export const PRIVATE_CONTENT_ROUTES: Routes = [
@@ -55,5 +56,9 @@ export const PRIVATE_CONTENT_ROUTES: Routes = [
   {
     path: 'event-management',
     component: EventManagementComponent
+  },
+  {
+    path: 'report-management',
+    component: ReportManagementComponent
   }
 ];

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from 'app/shared/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-list-users',
@@ -24,6 +25,7 @@ export class ListUsersComponent {
     { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
     { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
   ];
+  temp = [];
   columns = [
     { name: 'ID' },
     { name: 'Name' },
@@ -38,7 +40,7 @@ export class ListUsersComponent {
   }
 
   ngOnInit() {
-
+    this.temp = [...this.rows];
   }
 
   onEdit(rowIndex) {
@@ -47,6 +49,22 @@ export class ListUsersComponent {
 
   onDelete(rowIndex) {
     console.log('onDelete', rowIndex);
+  }
+
+  onBlock(rowIndex) {
+    this.rows[rowIndex].activated = false;
+  }
+
+  onUnblock(rowIndex) {
+    this.rows[rowIndex].activated = true;
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+    const temp = this.temp.filter(function (d) {
+      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+    this.rows = temp;
   }
 
 }
