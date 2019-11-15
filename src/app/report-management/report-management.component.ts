@@ -11,15 +11,24 @@ import { ToastrService } from 'ngx-toastr';
 export class ReportManagementComponent {
 
   rows = [
-    // { node: 'Sngine', type: 'michael', user: "Rotary Power", time: "5 April 2019", actions: "" },
+    { node: 'Sngine', type: 'User', reportedBy: "Rotary Power", reportedCount: 0, time: "5 April 2019", actions: "" },
+    { node: '', type: 'Post', reportedBy: "Beutel Ratte", reportedCount: 0, time: "10 May 2019", actions: "" },
+    { node: '', type: 'Thread', reportedBy: "Red G Vcf", reportedCount: 0, time: "27 September 2019", actions: "" },
+    { node: '', type: 'Thread', reportedBy: "Guiherme Leles", reportedCount: 0, time: "27 September 2019", actions: "" },
+    { node: '', type: 'News', reportedBy: "Artem Test", reportedCount: 0, time: "11 November 2019", actions: "" },
+    { node: '', type: 'Comment', reportedBy: "Chan Faa", reportedCount: 0, time: "15 May 2019", actions: "" },
+    { node: '', type: 'Reply', reportedBy: "Test User", reportedCount: 0, time: "30 October 2019", actions: "" },
+    { node: '', type: 'Message', reportedBy: "Guiherme Leles", reportedCount: 0, time: "25 June 2019", actions: "" },
+    { node: 'Man Them', type: 'User', reportedBy: "Man Them", reportedCount: 0, time: "15 July 2019", actions: "" },
+    { node: 'Guiherme Leles', type: 'User', reportedBy: "Test User", reportedCount: 0, time: "15 July 2019", actions: "" },
   ];
   temp = [];
   columns = [
     { name: 'ID' },
     { name: 'Node' },
     { name: 'Type' },
-    { name: 'Reported By' },
-    { name: 'Reported Count' },
+    { name: 'ReportedBy' },
+    { name: 'ReportedCount' },
     { name: 'Time' },
     { name: 'Actions' },
   ];
@@ -30,6 +39,16 @@ export class ReportManagementComponent {
 
   ngOnInit() {
     this.temp = [...this.rows];
+    this.calcuatereportedCountCount();
+  }
+
+  calcuatereportedCountCount() {
+    //TODO: calculate the reportedCount count when unique id is ready
+    this.rows.forEach((row, index) => {
+      console.log(index);
+      console.log('row', row);
+      this.rows[index].reportedCount = 1
+    });
   }
 
   onAddAdmin() {
@@ -50,7 +69,7 @@ export class ReportManagementComponent {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.temp.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+      return (d.node.toLowerCase() + d.type.toLowerCase() + d.reportedBy.toLowerCase()).indexOf(val) !== -1 || !val;
     });
     this.rows = temp;
   }

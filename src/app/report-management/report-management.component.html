@@ -23,14 +23,32 @@
                 {{rowIndex + 1}}
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Name">
+            <ngx-datatable-column name="Node">
+              <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                <a *ngIf="value" href="https://google.com/" target="_blank">{{value}}</a>
+                <a *ngIf="!value" class="btn btn-flat btn-light" href="https://google.com/" target="_blank">
+                  <i class="fa fa-eye mr5"></i> View {{rows[rowIndex].type}}</a>
+              </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Username"></ngx-datatable-column>
-            <ngx-datatable-column name="Joined"></ngx-datatable-column>
+            <ngx-datatable-column name="Type">
+              <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                <span *ngIf="value=='User'" class="badge badge-lg badge-success">{{value}}</span>
+                <span *ngIf="value=='Post'" class="badge badge-lg badge-danger">{{value}}</span>
+                <span *ngIf="value=='Thread'" class="badge badge-lg badge-primary">{{value}}</span>
+                <span *ngIf="value=='News'" class="badge badge-lg badge-secondary">{{value}}</span>
+                <span *ngIf="value=='Comment'" class="badge badge-lg badge-info">{{value}}</span>
+                <span *ngIf="value=='Reply'" class="badge badge-lg badge-warning">{{value}}</span>
+                <span *ngIf="value=='Message'" class="badge badge-lg badge-dark">{{value}}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="ReportedBy">
+            </ngx-datatable-column>
+            <ngx-datatable-column name="ReportedCount"></ngx-datatable-column>
+            <ngx-datatable-column name="Time"></ngx-datatable-column>
             <ngx-datatable-column name="Actions">
               <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-                <button type="button" class="btn btn-outline-primary btn-round" (click)="onUpdate(rowIndex)">
-                  Update</button>
+                <button type="button" class="btn btn-outline-success btn-round" (click)="onMarkSafe(rowIndex)">
+                  Mark as Safe</button>
                 <button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
                   (click)="onDelete(rowIndex)">Delete</button>
               </ng-template>
