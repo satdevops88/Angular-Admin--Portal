@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { FormsModule } from '@angular/forms';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { ListUsersComponent } from './users/list-users.component';
 import { ListAdminsComponent } from './admins/list-admins.component';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AddAdminComponent } from './add-admin/add-admin.component';
-import { FormsModule } from '@angular/forms';
 import { UpdateAdminComponent } from './update-admin/update-admin.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -16,14 +18,16 @@ import { UpdateAdminComponent } from './update-admin/update-admin.component';
         CommonModule,
         FormsModule,
         UserManagementRoutingModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        NgbModule
     ],
     exports: [],
     declarations: [
         ListUsersComponent,
         ListAdminsComponent,
         AddAdminComponent,
-        UpdateAdminComponent
+        UpdateAdminComponent,
+        UserDetailComponent
     ],
     providers: [],
 })

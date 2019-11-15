@@ -4,6 +4,7 @@ import { ListUsersComponent } from './users/list-users.component';
 import { ListAdminsComponent } from './admins/list-admins.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { UpdateAdminComponent } from './update-admin/update-admin.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,13 @@ const routes: Routes = [
                 component: UpdateAdminComponent,
                 data: {
                     title: 'Update Admin'
+                }
+            },
+            {
+                path: 'user-detail/:userid',
+                component: UserDetailComponent,
+                data: {
+                    title: 'User Detail'
                 }
             }
         ]

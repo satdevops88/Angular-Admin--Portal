@@ -23,6 +23,9 @@
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Name">
+              <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                <a [routerLink]="['/user-management/user-detail/123456']">{{value}}</a>
+              </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Username"></ngx-datatable-column>
             <ngx-datatable-column name="Joined"></ngx-datatable-column>
