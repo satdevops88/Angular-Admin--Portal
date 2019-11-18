@@ -1,91 +1,86 @@
 <section id="basic-form-layouts">
-   <div class="row text-left">
-      <div class="col-sm-12">
-         <div class="content-header">Update Admin User</div>
-      </div>
-   </div>
+  <div class="row text-left">
+    <div class="col-sm-12">
+      <div class="content-header">Update Admin User</div>
+    </div>
+  </div>
 </section>
 
 <section id="user-profile">
-   <div class="row">
-      <div class="col-12">
-         <div class="card profile-with-cover">
-            <div class="media profil-cover-details row">
-               <div class="col-5">
-               </div>
-               <div class="col-2">
-                  <div class="align-self-center halfway-fab text-center">
-                     <a class="profile-image">
-                        <img src="assets/img/portrait/avatars/avatar-08.png"
-                           class="rounded-circle img-border gradient-summer width-100" alt="Card image">
-                     </a>
-                  </div>
-               </div>
-               <div class="col-5">
-               </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card profile-with-cover">
+        <div class="media profil-cover-details row">
+          <div class="col-5">
+          </div>
+          <div class="col-2">
+            <div class="align-self-center halfway-fab text-center">
+              <a class="profile-image">
+                <img src="assets/img/portrait/avatars/avatar-08.png"
+                  class="rounded-circle img-border gradient-summer width-100" alt="Card image">
+              </a>
             </div>
-            <div class="profile-section">
-               <div class="row">
-                  <div class="col-lg-5 col-md-5 ">
-                  </div>
-                  <div class="col-lg-2 col-md-2 text-center">
-                     <p class="font-small-5">{{name}}</p>
-                  </div>
-                  <div class="col-lg-5 col-md-5">
-                  </div>
-               </div>
-
-               <div class="row">
-                  <div class="col-lg-2 col-md-0"></div>
-                  <div class="col-lg-8 col-md-12">
-                     <div class="card-body">
-                        <div class="px-3">
-                           <form class="form" #f="ngForm">
-                              <div class="form-body">
-                                 <h4 class="form-section"><i class="ft-user"></i> Admin Infomation</h4>
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                       <div class="form-group">
-                                          <label for="name">Name</label>
-                                          <input type="text" id="name" class="form-control" name="name"
-                                             [(ngModel)]="name" required>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="row">
-                                    <div class="col-md-6">
-                                       <div class="form-group">
-                                          <label for="username">Username</label>
-                                          <input type="text" id="username" class="form-control" name="username"
-                                             [(ngModel)]="username" required>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                       <div class="form-group">
-                                          <label for="email">E-mail</label>
-                                          <input type="text" id="email" class="form-control" name="email"
-                                             [(ngModel)]="email" required>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="form-actions right">
-                                 <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
-                                    <i class="ft-x"></i> Cancel
-                                 </button>
-                                 <button type="button" class="btn btn-raised btn-primary" (click)="onUpdate()"
-                                    [disabled]="!f.valid">
-                                    <i class="fa fa-check-square-o"></i> Update
-                                 </button>
-                              </div>
-                           </form>
+          </div>
+          <div class="col-5">
+          </div>
+        </div>
+        <div class="profile-section">
+          <div class="row">
+            <div class="col-lg-5 col-md-5 ">
+            </div>
+            <div class="col-lg-2 col-md-2 text-center">
+              <p class="font-small-5">{{name}}</p>
+            </div>
+            <div class="col-lg-5 col-md-5">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-2 col-md-0"></div>
+            <div class="col-lg-8 col-md-12">
+              <div class="card-body">
+                <div class="px-3">
+                  <form class="form" #f="ngForm">
+                    <div class="form-body">
+                      <h4 class="form-section"><i class="ft-user"></i> Admin Infomation</h4>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control" name="name" [(ngModel)]="name" required>
+                          </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-2 col-md-0"></div>
-               </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" class="form-control" name="username" [(ngModel)]="username"
+                              required>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="text" id="email" class="form-control" name="email" [(ngModel)]="email"
+                              required>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-actions right">
+                      <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
+                        <i class="ft-x"></i> Cancel </button>
+                      <button type="button" class="btn btn-raised btn-primary" (click)="onUpdate()"
+                        [disabled]="!f.valid"> <i class="fa fa-check-square-o"></i> Update </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
-         </div>
+            <div class="col-lg-2 col-md-0"></div>
+          </div>
+        </div>
       </div>
-   </div>
+    </div>
+  </div>
 </section>

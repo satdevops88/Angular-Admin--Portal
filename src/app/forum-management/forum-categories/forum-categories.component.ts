@@ -16,13 +16,13 @@ export class ForumCategoriesComponent {
   temp = [];
   columns = [
     { name: 'ID' },
-    { name: 'Name' },
+    { name: 'Title' },
     { name: 'Subcategories' },
     { name: 'Actions' }
   ];
   subcolumns = [
     { name: 'ID' },
-    { name: 'Name' },
+    { name: 'Title' },
     { name: 'Threads' },
     { name: 'Actions' }
   ];
@@ -49,20 +49,20 @@ export class ForumCategoriesComponent {
 
   onSubUpdate(rowIndex) {
     console.log('onSubUpdate');
-
+    this.router.navigate(['forum-management/update-categories/' + this.selected[0].name + '/' + this.subrows[rowIndex].name]);
   }
 
   onSubDelete(rowIndex) {
-    if (confirm('Are you sure to delete "' + this.subrows[rowIndex].name + '" SubCategory ?')) {
+    if (confirm('Are you sure to delete "' + this.subrows[rowIndex].title + '" SubCategory ?')) {
       this.toastr.success('Deleted SubCategory Successfully', 'Success');
     }
   }
   onUpdate(rowIndex) {
-    this.router.navigate(['user-management/update-admin/' + rowIndex])
+    this.router.navigate(['forum-management/update-categories/' + this.rows[rowIndex].name + '/all']);
   }
 
   onDelete(rowIndex) {
-    if (confirm('Are you sure to delete "' + this.rows[rowIndex].name + '" Category ?')) {
+    if (confirm('Are you sure to delete "' + this.rows[rowIndex].title + '" Category ?')) {
       this.toastr.success('Deleted Category Successfully', 'Success');
     }
   }

@@ -12,8 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UpdateAdminComponent implements OnInit {
   @ViewChild('f') adminForm: NgForm;
-
-
   constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
 
   }

@@ -6,6 +6,7 @@ import { ForumManagementRoutingModule } from './forum-management-routing.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ForumCategoriesComponent } from './forum-categories/forum-categories.component';
 import { ForumThreadsComponent } from './forum-threads/forum-threads.component';
+import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
 
 
 
@@ -21,7 +22,8 @@ import { ForumThreadsComponent } from './forum-threads/forum-threads.component';
     exports: [],
     declarations: [
         ForumCategoriesComponent,
-        ForumThreadsComponent
+        ForumThreadsComponent,
+        UpdateCategoriesComponent
     ],
     providers: [],
 })

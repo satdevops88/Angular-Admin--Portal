@@ -22,10 +22,9 @@
 								{{rowIndex + 1}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Name">
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-								<!-- <a [routerLink]="['/forum-management/user-detail/123456']">{{value}}</a> -->
-								{{value}}
+						<ngx-datatable-column name="Title">
+							<ng-template let-column="column" ngx-datatable-header-template>
+								Categories Name
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Subcategories">
@@ -52,7 +51,7 @@
 	<div class="col-sm-6">
 		<div class="card">
 			<div class="card-header">
-				{{selected[0].name}} / Sub Categories Details
+				{{selected[0].title}} / Sub Categories Details
 			</div>
 			<div class="card-body">
 				<div class="card-block">
@@ -63,9 +62,9 @@
 								{{rowIndex + 1}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Name">
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-								{{value}}
+						<ngx-datatable-column name="Title">
+							<ng-template let-column="column" ngx-datatable-header-template>
+								SubCategories Name
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Threads">

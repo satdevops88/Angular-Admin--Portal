@@ -1,22 +1,23 @@
 export const CATEGORIES: any[] = [
     {
         name: 'technology', title: 'Technology', subcategories: [
-            { name: 'Technology Market' },
-            { name: 'Graphic & Video' },
-            { name: 'Art' }
+            { name: 'technologymarket', title: 'Technology Market' },
+            { name: 'graphicvideo', title: 'Graphic & Video' },
+            { name: 'art', title: 'Art' },
+            { name: 'phones', title: 'Phones' }
         ]
     },
     {
         name: 'entertainment', title: 'Entertainment', subcategories: [
-            { name: 'Literature' },
-            { name: 'Forum Games' },
-            { name: 'Gaming' }
+            { name: 'literature', title: 'Literature' },
+            { name: 'forumgames', title: 'Forum Games' },
+            { name: 'gaming', title: 'Gaming' }
         ]
     },
     {
         name: 'general', title: 'General', subcategories: [
-            { name: 'Pets' },
-            { name: 'Agriculture' }
+            { name: 'pets', title: 'Pets' },
+            { name: 'agriculture', title: 'Agriculture' }
         ]
     }
 ];
