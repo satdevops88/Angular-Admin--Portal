@@ -3,7 +3,6 @@ import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { ProfileComponent } from 'app/profile/profile.component';
 import { UserPostComponent } from 'app/user-post/user-post.component';
 import { NotificationComponent } from 'app/notification/notification.component';
-import { ForumManagementComponent } from 'app/forum-management/forum-management.component';
 import { DirectMessageComponent } from 'app/direct-message/direct-message.component';
 import { AdvertisementComponent } from 'app/advertisement/advertisement.component';
 import { NewsManagementComponent } from 'app/news-management/news-management.component';
@@ -35,7 +34,7 @@ export const PRIVATE_CONTENT_ROUTES: Routes = [
   },
   {
     path: 'forum-management',
-    component: ForumManagementComponent
+    loadChildren: './forum-management/forum-management.module#ForumManagementModule'
   },
   {
     path: 'news-management',

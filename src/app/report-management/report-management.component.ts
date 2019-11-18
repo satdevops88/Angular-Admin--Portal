@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from 'app/shared/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-report-management',
@@ -32,8 +33,9 @@ export class ReportManagementComponent {
     { name: 'Time' },
     { name: 'Actions' },
   ];
+  closeResult: string;
 
-  constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
+  constructor(private toastr: ToastrService, private modalService: NgbModal) {
 
   }
 
@@ -48,6 +50,15 @@ export class ReportManagementComponent {
       this.rows[index].reportedCount = 1
     });
   }
+  onViewReport(rowIndex, content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      console.log(reason);
+
+    });
+
+  }
 
   onMarkSafe(rowIndex) {
     this.toastr.success('Maked as Safe Successfully', 'Success');
@@ -55,8 +66,8 @@ export class ReportManagementComponent {
   }
 
   onDelete(rowIndex) {
-    if (confirm('Are you sure to delete Admin User ?')) {
-      this.toastr.success('Deleted Admin User Successfully', 'Success');
+    if (confirm('Are you sure to delete This report ?')) {
+      this.toastr.success('Deleted Report Successfully', 'Success');
     }
   }
 

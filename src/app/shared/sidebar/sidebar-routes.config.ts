@@ -15,7 +15,10 @@ export const ROUTES: RouteInfo[] = [
         path: '/user-post', title: 'User Post Mangement', icon: 'ft-edit', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
-        path: '/forum-management', title: 'Forum Mangement', icon: 'ft-tv', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+        path: '/', title: 'Forum Mangement', icon: 'ft-tv', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+            { path: '/forum-management/categories', title: 'List Categories', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/forum-management/threads', title: 'Threads Management', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+        ]
     },
     {
         path: '/news-management', title: 'News Mangement', icon: 'ft-file-text', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []

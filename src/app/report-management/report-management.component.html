@@ -17,8 +17,8 @@
       <div class="card-body">
         <div class="card-block">
           <ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
-            [rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows">
-            <ngx-datatable-column name="ID" [width]="50">
+            [rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows" [scrollbarV]="true">
+            <ngx-datatable-column name="ID">
               <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                 {{rowIndex + 1}}
               </ng-template>
@@ -45,10 +45,27 @@
             </ngx-datatable-column>
             <ngx-datatable-column name="ReportedCount"></ngx-datatable-column>
             <ngx-datatable-column name="Time"></ngx-datatable-column>
-            <ngx-datatable-column name="Actions">
+            <ngx-datatable-column name="Actions" [width]="300">
               <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-                <button type="button" class="btn btn-outline-success btn-round" (click)="onMarkSafe(rowIndex)">
-                  Mark as Safe</button>
+                <!-- Modal template -->
+                <ng-template #content let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Modal title</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>This is report content</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-raised" (click)="c('Close click')">Close</button>
+                  </div>
+                </ng-template>
+                <button type="button" class="btn btn-outline-primary btn-round"
+                  (click)="onViewReport(rowIndex, content)">View Report</button>
+                <button type="button" class="btn btn-outline-success btn-round" style="margin-left: 10px;"
+                  (click)="onMarkSafe(rowIndex)">Mark as Safe</button>
                 <button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
                   (click)="onDelete(rowIndex)">Delete</button>
               </ng-template>

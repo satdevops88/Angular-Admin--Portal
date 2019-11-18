@@ -3,11 +3,11 @@ import { ApiService } from 'app/shared/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-forum-management',
-  templateUrl: './forum-management.component.html',
-  styleUrls: ['./forum-management.component.scss']
+  selector: 'app-forum-threads',
+  templateUrl: './forum-threads.component.html',
+  styleUrls: ['./forum-threads.component.scss']
 })
-export class ForumManagementComponent {
+export class ForumThreadsComponent {
 
   //-- CONSTRUCTORS
   /**

@@ -1,0 +1,95 @@
+<section id="basic-form-layouts">
+	<div class="row text-left">
+		<div class="col-sm-12">
+			<div class="content-header">Categories List</div>
+		</div>
+	</div>
+</section>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="card">
+			<div class="card-header">
+				Categories Details
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
+						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows" [selected]="selected"
+						[selectionType]="'single'" (select)="onSelect($event)">
+						<ngx-datatable-column name="ID" [width]="50">
+							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+								{{rowIndex + 1}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Name">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<!-- <a [routerLink]="['/forum-management/user-detail/123456']">{{value}}</a> -->
+								{{value}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Subcategories">
+							<ng-template let-column="column" ngx-datatable-header-template>
+								Sub Categories Count
+							</ng-template>
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								{{rows[rowIndex].subcategories.length}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Actions" [width]="300">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<button type="button" class="btn btn-outline-primary btn-round" style="margin-left: 10px;"
+									(click)="onUpdate(rowIndex)">Update</button>
+								<button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
+									(click)="onDelete(rowIndex)">Delete</button>
+							</ng-template>
+						</ngx-datatable-column>
+					</ngx-datatable>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="card">
+			<div class="card-header">
+				{{selected[0].name}} / Sub Categories Details
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<ngx-datatable class="material" [columns]="subcolumns" [columnMode]="'force'" [headerHeight]="50"
+						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="subrows">
+						<ngx-datatable-column name="ID" [width]="50">
+							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+								{{rowIndex + 1}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Name">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								{{value}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Threads">
+							<ng-template let-column="column" ngx-datatable-header-template>
+								Threads Count
+							</ng-template>
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								0
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Actions" [width]="300">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<button type="button" class="btn btn-outline-success btn-round" (click)="onViewThread(rowIndex)">
+									View Thread</button>
+								<button type="button" class="btn btn-outline-primary btn-round" style="margin-left: 10px;"
+									(click)="onSubUpdate(rowIndex)"> Update</button>
+								<button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
+									(click)="onSubDelete(rowIndex)">Delete</button>
+							</ng-template>
+						</ngx-datatable-column>
+					</ngx-datatable>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
