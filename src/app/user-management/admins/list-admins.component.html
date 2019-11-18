@@ -1,7 +1,7 @@
 <section id="basic-form-layouts">
   <div class="row text-left">
     <div class="col-sm-12">
-      <div class="content-header">User List</div>
+      <div class="content-header">Admin List</div>
     </div>
   </div>
 </section>
@@ -11,10 +11,10 @@
     <div class="card">
       <div class="card-header ">
         <div class="card-header-button">
-          <input type="text" style="padding:6px; width:30%;" placeholder="Type to filter the Name ..."
+          <input type="text" style="padding:6px; margin:15px; width:30%;" placeholder="Type to filter the Name ..."
             (keyup)="updateFilter($event)" />
-          <button type="button" class="btn btn-primary btn-round btn-raised" (click)="onAddAdmin()">
-            Create Admin User</button>
+          <button type="button" class="btn btn-primary btn-round btn-raised" style="margin-top: 15px;"
+            (click)="onAddAdmin()"> Create Admin User</button>
         </div>
       </div>
       <div class="card-body">

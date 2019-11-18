@@ -42,9 +42,8 @@ export class ForumCategoriesComponent {
     this.subrows = selected[0].subcategories;
   }
 
-  onViewThread(rowIndex) {
-    console.log('onViewThread', this.subrows);
-
+  onViewThreads(rowIndex) {
+    this.router.navigate(['forum-management/threads'])
   }
 
   onSubUpdate(rowIndex) {

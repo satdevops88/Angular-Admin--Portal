@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ForumCategoriesComponent } from './forum-categories/forum-categories.component';
 import { ForumThreadsComponent } from './forum-threads/forum-threads.component';
 import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
+import { ThreadsDatailComponent } from './threads-detail/threads-detail.component';
 
 
 
@@ -23,7 +24,8 @@ import { UpdateCategoriesComponent } from './update-categories/update-categories
     declarations: [
         ForumCategoriesComponent,
         ForumThreadsComponent,
-        UpdateCategoriesComponent
+        UpdateCategoriesComponent,
+        ThreadsDatailComponent
     ],
     providers: [],
 })

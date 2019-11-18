@@ -1,3 +1,68 @@
-<div>
-	This is Forum Threads Page
+<section id="basic-form-layouts">
+	<div class="row text-left">
+		<div class="col-sm-12">
+			<div class="content-header">Threads List</div>
+		</div>
+	</div>
+</section>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header" style="display: flex;">
+				<div ngbDropdown style="margin-top: 15px;">
+					<button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Threads Actions</button>
+					<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+						<button class="dropdown-item">Action 1</button>
+						<button class="dropdown-item">Action 2</button>
+						<button class="dropdown-item" (click)="onCombineThreads()">Combine</button>
+						<button class="dropdown-item">Something else</button>
+					</div>
+				</div>
+				<input type="text" style="padding:5px;margin:15px;width:30%;"
+					placeholder="Type to filter the Title or Content ..." (keyup)="updateFilter($event)" />
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
+						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows" [selected]="selected"
+						[selectionType]="'checkbox'" (select)="onSelect($event)">
+						<ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
+							[resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+						</ngx-datatable-column>
+						<ngx-datatable-column name="ID" [width]="50">
+							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+								{{rowIndex + 1}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Categories">
+							<ng-template let-column="column" ngx-datatable-header-template>
+								Categories Name
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Subcategories">
+							<ng-template let-column="column" ngx-datatable-header-template>
+								SubCategories Name
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Title">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<a [routerLink]="['/forum-management/threads/1211-2323-2342']">{{value}}</a>
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Content">
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Actions" [width]="300">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<button type="button" class="btn btn-outline-primary btn-round" style="margin-left: 10px;"
+									(click)="onUpdate(rowIndex)">Update</button>
+								<button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
+									(click)="onDelete(rowIndex)">Delete</button>
+							</ng-template>
+						</ngx-datatable-column>
+					</ngx-datatable>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

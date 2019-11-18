@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ForumCategoriesComponent } from './forum-categories/forum-categories.component';
 import { ForumThreadsComponent } from './forum-threads/forum-threads.component';
 import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
+import { ThreadsDatailComponent } from './threads-detail/threads-detail.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,13 @@ const routes: Routes = [
                 component: ForumThreadsComponent,
                 data: {
                     title: 'Threads'
+                }
+            },
+            {
+                path: 'threads/:threadID',
+                component: ThreadsDatailComponent,
+                data: {
+                    title: 'ThreadsDetail'
                 }
             },
             {
