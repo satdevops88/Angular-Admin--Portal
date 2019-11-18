@@ -1,7 +1,7 @@
 <section id="basic-form-layouts">
 	<div class="row text-left">
 		<div class="col-sm-12">
-			<div class="content-header">Categories List</div>
+			<div class="content-header">Categories / SubCategories List</div>
 		</div>
 	</div>
 </section>
@@ -9,8 +9,9 @@
 <div class="row">
 	<div class="col-sm-6">
 		<div class="card">
-			<div class="card-header">
+			<div class="card-header flex-space-between">
 				Categories Details
+				<button class="btn btn-raised btn-round btn-primary" (click)="onCreateCategories()">Create Categories</button>
 			</div>
 			<div class="card-body">
 				<div class="card-block">
@@ -50,8 +51,10 @@
 	</div>
 	<div class="col-sm-6">
 		<div class="card">
-			<div class="card-header">
+			<div class="card-header flex-space-between">
 				{{selected[0].title}} / Sub Categories Details
+				<button class="btn btn-raised btn-round btn-primary" (click)="onCreateSubCategories()">Create
+					SubCategories</button>
 			</div>
 			<div class="card-body">
 				<div class="card-block">

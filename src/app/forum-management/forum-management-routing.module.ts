@@ -4,6 +4,7 @@ import { ForumCategoriesComponent } from './forum-categories/forum-categories.co
 import { ForumThreadsComponent } from './forum-threads/forum-threads.component';
 import { UpdateCategoriesComponent } from './update-categories/update-categories.component';
 import { ThreadsDatailComponent } from './threads-detail/threads-detail.component';
+import { CreateCategoriesComponent } from './create-categories/create-categories.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,13 @@ const routes: Routes = [
                 component: UpdateCategoriesComponent,
                 data: {
                     title: 'Update Categories'
+                }
+            },
+            {
+                path: 'create-categories/:category',
+                component: CreateCategoriesComponent,
+                data: {
+                    title: 'Create Categories'
                 }
             }
         ]

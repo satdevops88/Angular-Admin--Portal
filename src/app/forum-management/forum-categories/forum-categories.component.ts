@@ -35,8 +35,6 @@ export class ForumCategoriesComponent {
     this.rows = CATEGORIES.filter(categories => categories);
     this.selected = [this.rows[0]]
     this.subrows = this.rows[0].subcategories;
-    console.log('this.rows', this.rows);
-
   }
   onSelect({ selected }) {
     this.subrows = selected[0].subcategories;
@@ -47,7 +45,6 @@ export class ForumCategoriesComponent {
   }
 
   onSubUpdate(rowIndex) {
-    console.log('onSubUpdate');
     this.router.navigate(['forum-management/update-categories/' + this.selected[0].name + '/' + this.subrows[rowIndex].name]);
   }
 
@@ -56,6 +53,11 @@ export class ForumCategoriesComponent {
       this.toastr.success('Deleted SubCategory Successfully', 'Success');
     }
   }
+
+  onCreateSubCategories() {
+    this.router.navigate(['forum-management/create-categories/' + this.selected[0].name]);
+  }
+
   onUpdate(rowIndex) {
     this.router.navigate(['forum-management/update-categories/' + this.rows[rowIndex].name + '/all']);
   }
@@ -64,6 +66,10 @@ export class ForumCategoriesComponent {
     if (confirm('Are you sure to delete "' + this.rows[rowIndex].title + '" Category ?')) {
       this.toastr.success('Deleted Category Successfully', 'Success');
     }
+  }
+
+  onCreateCategories() {
+    this.router.navigate(['forum-management/create-categories/new']);
   }
 
 }

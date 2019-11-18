@@ -11,10 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 export class ForumThreadsComponent {
 
   rows = [
-    { categories: "Technology", subcategories: "Technology Market", title: "what is the technology market?", content: "Technology market is the market of Technology" },
-    { categories: "Technology", subcategories: "Technology Market", title: "Testing", content: "This is the testing Thread" },
-    { categories: "Entertainment", subcategories: "Literature", title: "what is the Literature?", content: "Literature is the Literature" },
-    { categories: "Entertainment", subcategories: "Gaming", title: "what is the Gaming?", content: "Gaming is the Gaming of Entertainment" },
+    { categories: "Technology", subcategories: "Technology Market", title: "what is the technology market?", content: "Technology market is the market of Technology", date: "3 months ago" },
+    { categories: "Technology", subcategories: "Technology Market", title: "Testing", content: "This is the testing Thread", date: "yesterday" },
+    { categories: "Entertainment", subcategories: "Literature", title: "what is the Literature?", content: "Literature is the Literature", date: "2 months ago" },
+    { categories: "Entertainment", subcategories: "Gaming", title: "what is the Gaming?", content: "Gaming is the Gaming of Entertainment", date: "8 months ago" },
   ];
   temp = [];
   columns = [
@@ -24,7 +24,7 @@ export class ForumThreadsComponent {
     { name: 'Title' },
     { name: 'Content' },
     { name: 'Attachements' },
-    { name: 'Actions' }
+    { name: 'Date' }
   ];
   selected = [];
 

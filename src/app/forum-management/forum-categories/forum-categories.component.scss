@@ -5,3 +5,10 @@
 :host /deep/ .datatable-body-row.active .datatable-row-group {
   background-color: #6ede7e !important;
 }
+
+.flex-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
