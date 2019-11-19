@@ -5,7 +5,6 @@ import { UserPostComponent } from 'app/user-post/user-post.component';
 import { NotificationComponent } from 'app/notification/notification.component';
 import { DirectMessageComponent } from 'app/direct-message/direct-message.component';
 import { AdvertisementComponent } from 'app/advertisement/advertisement.component';
-import { NewsManagementComponent } from 'app/news-management/news-management.component';
 import { RoleManagementComponent } from 'app/role-management/role-management.component';
 import { EventManagementComponent } from 'app/event-management/event-management.component';
 import { ReportManagementComponent } from 'app/report-management/report-management.component';
@@ -38,7 +37,7 @@ export const PRIVATE_CONTENT_ROUTES: Routes = [
   },
   {
     path: 'news-management',
-    component: NewsManagementComponent
+    loadChildren: './news-management/news-management.module#NewsManagementModule'
   },
   {
     path: 'direct-message',
