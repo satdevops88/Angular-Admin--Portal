@@ -45,10 +45,31 @@
 								Category
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Comments"> </ngx-datatable-column>
+						<ngx-datatable-column name="Comments">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<a [routerLink]="['/news-management/news-details/1211-2323-2342']">{{value}}</a>
+							</ng-template>
+						</ngx-datatable-column>
 						<ngx-datatable-column name="Date"> </ngx-datatable-column>
 						<ngx-datatable-column name="ID"> </ngx-datatable-column>
 						<ngx-datatable-column name="Views"> </ngx-datatable-column>
+						<ngx-datatable-column name="Active">
+							<ng-template let-column="column" ngx-datatable-header-template>
+								Published/Draft
+							</ng-template>
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<span *ngIf="value" class="badge badge-pill badge-lg badge-success" style="cursor: pointer;"
+									(click)="onPublish(rowIndex)">Published</span>
+								<span *ngIf="!value" class="badge badge-pill badge-lg badge-danger" style="cursor: pointer;"
+									(click)="onDraft(rowIndex)">Draft</span>
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Actions" [width]="300">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<button type="button" class="btn btn-outline-primary btn-round" style="margin-left: 10px;"
+									(click)="onUpdate(rowIndex)">Update</button>
+							</ng-template>
+						</ngx-datatable-column>
 					</ngx-datatable>
 				</div>
 			</div>

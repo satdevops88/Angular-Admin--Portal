@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-news',
@@ -8,16 +10,22 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CreateNewsComponent {
 
-  //-- CONSTRUCTORS
-  /**
-   * @description Default constructor.
-   */
-  constructor(private router: Router, private route: ActivatedRoute) {
+  @ViewChild('f') newsForm: NgForm;
+
+  constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
 
   }
 
   ngOnInit() {
 
+  }
+
+  onCancel() {
+    this.router.navigate(['news-management/news']);
+  }
+  onCreate() {
+    this.router.navigate(['news-management/news']);
+    this.toastr.success('Created News Successfully', 'Success');
   }
 
 }

@@ -19,5 +19,7 @@ export class NewsDetailsComponent {
   ngOnInit() {
 
   }
-
+  onBack() {
+    this.router.navigate(['news-management/news'])
+  }
 }
