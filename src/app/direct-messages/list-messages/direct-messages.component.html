@@ -1,0 +1,51 @@
+<section id="basic-form-layouts">
+	<div class="row text-left">
+		<div class="col-sm-12">
+			<div class="content-header">Direct Messages</div>
+		</div>
+	</div>
+</section>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header" style="display: flex;">
+				<div ngbDropdown style="margin-top: 15px;">
+					<button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Direct Messages Actions</button>
+					<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+						<button class="dropdown-item">Remove all suspended users'</button>
+						<button class="dropdown-item">Invisible all Messages by particular User</button>
+					</div>
+				</div>
+				<input type="text" style="padding:5px;margin:15px;width:30%;" placeholder="Type to filter the User ..."
+					(keyup)="updateFilter($event)" />
+				<button type="button" class="btn btn-primary btn-round btn-raised" style="margin-top: 15px;"
+					(click)="onViewMessages()"> View Details</button>
+
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
+						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows" [selected]="selected"
+						[selectionType]="'checkbox'" (select)="onSelect($event)">
+						<ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
+							[resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+						</ngx-datatable-column>
+						<ngx-datatable-column name="ID" [width]="50">
+							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+								{{rowIndex + 1}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="User1">
+						</ngx-datatable-column>
+						<ngx-datatable-column name="User2">
+						</ngx-datatable-column>
+						<ngx-datatable-column name="LastDate">
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Status">
+						</ngx-datatable-column>
+					</ngx-datatable>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -24,7 +24,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/news-management/news', title: 'News Mangement', icon: 'ft-file-text', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
-        path: '/direct-message', title: 'Direct Messages', icon: 'ft-message-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+        path: '/direct-message/all', title: 'Direct Messages', icon: 'ft-message-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
         path: '/notification', title: 'Notification', icon: 'ft-clipboard', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []

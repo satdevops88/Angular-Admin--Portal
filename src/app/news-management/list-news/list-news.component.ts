@@ -50,7 +50,7 @@ export class ListNewsComponent {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.temp.filter(function (d) {
-      return (d.title + d.content).toLowerCase().indexOf(val) !== -1 || !val;
+      return (d.title + d.author).toLowerCase().indexOf(val) !== -1 || !val;
     });
     this.rows = temp;
   }

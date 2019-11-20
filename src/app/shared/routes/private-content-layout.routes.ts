@@ -3,7 +3,6 @@ import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { ProfileComponent } from 'app/profile/profile.component';
 import { UserPostComponent } from 'app/user-post/user-post.component';
 import { NotificationComponent } from 'app/notification/notification.component';
-import { DirectMessageComponent } from 'app/direct-message/direct-message.component';
 import { AdvertisementComponent } from 'app/advertisement/advertisement.component';
 import { RoleManagementComponent } from 'app/role-management/role-management.component';
 import { EventManagementComponent } from 'app/event-management/event-management.component';
@@ -41,7 +40,7 @@ export const PRIVATE_CONTENT_ROUTES: Routes = [
   },
   {
     path: 'direct-message',
-    component: DirectMessageComponent
+    loadChildren: './direct-messages/direct-messages.module#DirectMessagesModule'
   },
   {
     path: 'user-management',
