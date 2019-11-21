@@ -50,4 +50,12 @@ export class DirectMessagesComponent {
     this.router.navigate(['direct-message/view-details'])
   }
 
+  onVisible(rowIndex) {
+    this.rows[rowIndex].status = "Invisible";
+  }
+
+  onInvisible(rowIndex) {
+    this.rows[rowIndex].status = "Visible";
+  }
+
 }

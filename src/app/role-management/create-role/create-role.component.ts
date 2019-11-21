@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { ApiService } from 'app/shared/api/api.service';
+import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-role',
@@ -9,11 +10,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CreateRoleComponent {
 
-  //-- CONSTRUCTORS
-  /**
-   * @description Default constructor.
-   */
-  constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute) {
+  @ViewChild('f') newsForm: NgForm;
+
+  constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
 
   }
 
@@ -21,4 +20,11 @@ export class CreateRoleComponent {
 
   }
 
+  onCancel() {
+    this.router.navigate(['role-management/set-permissions']);
+  }
+  onCreate() {
+    this.router.navigate(['role-management/set-permissions']);
+    this.toastr.success('Created Role Successfully', 'Success');
+  }
 }

@@ -20,7 +20,6 @@
 					(keyup)="updateFilter($event)" />
 				<button type="button" class="btn btn-primary btn-round btn-raised" style="margin-top: 15px;"
 					(click)="onViewMessages()"> View Details</button>
-
 			</div>
 			<div class="card-body">
 				<div class="card-block">
@@ -42,6 +41,12 @@
 						<ngx-datatable-column name="LastDate">
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Status">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<span *ngIf="value=='Visible'" class="badge badge-pill badge-lg badge-success" style="cursor: pointer;"
+									(click)="onVisible(rowIndex)">Visible</span>
+								<span *ngIf="value!='Visible'" class="badge badge-pill badge-lg badge-danger" style="cursor: pointer;"
+									(click)="onInvisible(rowIndex)">Invisible</span>
+							</ng-template>
 						</ngx-datatable-column>
 					</ngx-datatable>
 				</div>
