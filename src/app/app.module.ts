@@ -26,7 +26,6 @@ import { ChartistModule } from 'ng-chartist';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
 import { UserPostComponent } from './user-post/user-post.component';
 import { NotificationComponent } from './notification/notification.component';
-import { RoleManagementComponent } from './role-management/role-management.component';
 import { EventManagementComponent } from './event-management/event-management.component';
 import { ReportManagementComponent } from './report-management/report-management.component';
 
@@ -42,7 +41,6 @@ import { ReportManagementComponent } from './report-management/report-management
         NotificationComponent,
         ProfileComponent,
         UserPostComponent,
-        RoleManagementComponent,
         EventManagementComponent,
         ReportManagementComponent
     ],

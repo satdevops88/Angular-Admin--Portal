@@ -5,187 +5,216 @@
 		</div>
 	</div>
 </section>
-<div class="email-application">
-	<div class="email-app-content row">
-		<div class="email-search-box w-100 bg-white p-2">
-			<div class="media">
-				<span class="email-app-sidebar-toggle ft-align-justify font-large-1 mr-2 d-xl-none"></span>
-				<div class="media-body">
-					<input type="text" class="form-control round" placeholder="search for emails">
-				</div>
+<div class="chat-application">
+	<div class="content-overlay"></div>
+	<div class="chat-sidebar float-left d-none d-sm-none d-md-block d-lg-block">
+		<div class="chat-sidebar-content">
+			<div class="chat-fixed-search p-2">
+				<form>
+					<div class="position-relative has-icon-left">
+						<input class="form-control" id="timesheetinput1" name="employeename" type="text">
+						<div class="form-control-position">
+							<i class="ft-user"></i>
+						</div>
+					</div>
+				</form>
 			</div>
-		</div>
-		<div class="email-app-content-area w-100">
-			<div class="email-app-list-mails p-0">
-				<div class="email-app-list">
-					<div id="users-list">
-						<div class="list-group">
-							<div class="users-list-padding">
-								<a [ngClass]="!mail.isDefault ? 'list-group-item list-group-item-action no-border' : 'list-group-item list-group-item-action bg-blue-grey bg-lighten-5 border-right-primary border-right-2'"
-									*ngFor="let mail of mail" (click)="DisplayMessage($event, [mail.mailId])">
-									<span class="media">
-										<span class="avatar avatar-md mr-2">
-											<span *ngIf="!mail.hasImage"
-												class="media-object rounded-circle text-circle d-flex mr-2 ml-0 justify-content-center align-items-center + ' ' + {{mail.imageClass}}">{{ mail.imageText }}</span>
-											<img *ngIf="mail.hasImage" class="media-object rounded-circle" [src]="mail.imagePath"
-												alt="Generic placeholder image">
-										</span>
-										<div class="media-body text-left">
-											<h6
-												[ngClass]="mail.isRead === false ? 'list-group-item-heading text-bold-400' : 'list-group-item-heading' ">
-												{{ mail.mailFrom }}
-												<span class="float-right">
-													<i class="fa-paperclip fa" *ngIf="mail.hasAttachment"></i>
-													<span
-														[ngClass]="mail.isRead === false ? 'font-small-2 primary' : 'font-small-2 float-right'">{{ mail.time }}</span>
-												</span>
-											</h6>
-											<p
-												[ngClass]="mail.isRead === false ? 'list-group-item-text text-truncate text-bold-500' : 'list-group-item-text text-truncate' ">
-												{{ mail.subject }}</p>
-											<p class="list-group-item-text">{{ mail.body }}
-												<span class="float-right primary" *ngIf="mail.hasLabel">
-													<span class="badge mr-1 + ' ' + {{mail.labelClass}}">{{ mail.labelType }}</span>
-													<i
-														[ngClass]="mail.isImportant === false ? 'font-medium-1 ft-star blue-grey lighten-3' : 'font-medium-1 ft-star warning'"></i>
-												</span>
-												<span class="float-right primary" *ngIf="!mail.hasLabel">
-													<i class="font-medium-1 ft-star blue-grey lighten-3"></i>
-												</span>
-											</p>
-
-										</div>
+			<div id="users-list" class="list-group position-relative">
+				<div class="users-list-padding">
+					<a class="list-group-item bg-blue-grey bg-lighten-5 border-right-primary border-right-2"
+						(click)="SetActive($event, 'chat1')">
+						<span class="media">
+							<span class="avatar avatar-md avatar-online">
+								<img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle"
+									src="assets/img/portrait/small/avatar-s-3.png" alt="Generic placeholder image">
+								<i></i>
+							</span>
+							<div class="media-body  text-left">
+								<h6 class="list-group-item-heading">Elizabeth Elliott
+									<span class="font-small-3 float-right primary">4:14 AM</span>
+								</h6>
+								<p class="list-group-item-text text-muted">
+									<i class="ft-check primary font-small-2"></i> Okay
+									<span class="float-right primary">
+										<i class="font-medium-1 icon-pin blue-grey lighten-3"></i>
 									</span>
-								</a>
-								<p class="primary text-center" *ngIf="mail.length === 0">There are no messages!</p>
+								</p>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="email-app-mail-content">
-				<div class="email-app-mail-content-detail" *ngIf="isMessageSelected">
-					<div class="email-app-options card-block">
-						<div class="row d-md-none">
-							<button class="btn btn-raised btn-primary ml-2 back-to-inbox">
-								<i class="fa fa-angle-left"></i> Back to inbox</button>
-						</div>
-						<div class="row">
-							<div class="col-sm-6 col-12 text-left">
-								<div class="btn-group" role="group" aria-label="Basic example">
-									<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="tooltip"
-										data-placement="top" data-original-title="Replay">
-										<i class="fa fa-reply"></i>
-									</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="tooltip"
-										data-placement="top" data-original-title="Replay All">
-										<i class="fa fa-reply-all"></i>
-									</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="tooltip"
-										data-placement="top" data-original-title="Report SPAM">
-										<i class="ft-alert-octagon"></i>
-									</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="tooltip"
-										data-placement="top" data-original-title="Delete">
-										<i class="ft-trash-2"></i>
-									</button>
-								</div>
+						</span>
+					</a>
+					<a class="list-group-item no-border" (click)="SetActive($event,'chat2')">
+						<span class="media">
+							<span class="avatar avatar-md avatar-busy">
+								<img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle"
+									src="assets/img/portrait/small/avatar-s-7.png" alt="Generic placeholder image">
+								<i></i>
+							</span>
+							<div class="media-body  text-left">
+								<h6 class="list-group-item-heading">Kristopher Candy
+									<span class="font-small-3 float-right primary">9:04 PM</span>
+								</h6>
+								<p class="list-group-item-text text-muted">
+									<i class="ft-check primary font-small-2"></i> Thank you
+									<span class="float-right 
+                        primary">
+										<span class="badge badge-pill badge-primary">12</span>
+									</span>
+								</p>
 							</div>
-							<div class="col-sm-6 col-12 text-right">
-								<div class="btn-group" role="group" aria-label="Basic example">
-									<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="tooltip"
-										data-placement="top" data-original-title="Previous">
-										<i class="fa fa-angle-left"></i>
-									</button>
-									<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="tooltip"
-										data-placement="top" data-original-title="Next">
-										<i class="fa fa-angle-right"></i>
-									</button>
-								</div>
-								<div class="btn-group ml-1">
-									<div ngbDropdown placement="bottom-right" class="d-inline-block">
-										<button class="btn btn-sm btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle>More</button>
-										<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-											<button class="dropdown-item">Mark as unread</button>
-											<button class="dropdown-item">Mark as unimportant</button>
-											<button class="dropdown-item">Add star</button>
-											<button class="dropdown-item">Add to task</button>
-											<div class="dropdown-divider"></div>
-											<button class="dropdown-item">Filter mail</button>
-										</div>
-									</div>
-								</div>
+						</span>
+					</a>
+					<a class="list-group-item no-border" (click)="SetActive($event,'chat3')">
+						<span class="media">
+							<span class="avatar avatar-md avatar-away">
+								<img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle"
+									src="assets/img/portrait/small/avatar-s-8.png" alt="Generic placeholder image">
+								<i></i>
+							</span>
+							<div class="media-body  text-left">
+								<h6 class="list-group-item-heading">Sarah Woods
+									<span class="font-small-3 float-right primary">2:14 AM</span>
+								</h6>
+								<p class="list-group-item-text text-muted">
+									<i class="ft-check font-small-2"></i> Hello krish!
+									<span class="float-right primary">
+										<i class="font-medium-1 icon-volume-off blue-grey lighten-3 mr-1"></i>
+										<span class="badge badge-pill badge-primary">3</span>
+									</span>
+								</p>
 							</div>
-						</div>
-					</div>
-
-					<div class="email-app-title card-block">
-						<h3 class="list-group-item-heading text-left">{{message.subject}}</h3>
-						<div class="row">
-							<div class="col-sm-6 col-12 text-left">
-								<span class="primary">
-									<span class="badge badge-primary ">Previous</span>
-								</span>
+						</span>
+					</a>
+					<a class="list-group-item no-border" (click)="SetActive($event,'chat4')">
+						<span class="media">
+							<span class="avatar avatar-md avatar-away">
+								<img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle"
+									src="assets/img/portrait/small/avatar-s-5.png" alt="Generic placeholder image">
+								<i></i>
+							</span>
+							<div class="media-body  text-left">
+								<h6 class="list-group-item-heading">Bruce Reid
+									<span class="font-small-3 float-right primary">Yesterday</span>
+								</h6>
+								<p class="list-group-item-text text-muted">
+									<i class="ft-check font-small-2"></i> Will connect you</p>
 							</div>
-							<div class="col-sm-6 col-12 text-right">
-								<i class="float-right font-medium-3 ft-star warning"></i>
+						</span>
+					</a>
+					<a class="list-group-item no-border" (click)="SetActive($event,'chat5')">
+						<span class="media">
+							<span class="avatar avatar-md avatar-online">
+								<img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle"
+									src="assets/img/portrait/small/avatar-s-9.png" alt="Generic placeholder image">
+								<i></i>
+							</span>
+							<div class="media-body  text-left">
+								<h6 class="list-group-item-heading">Heather Howell
+									<span class="font-small-3 float-right primary">Friday</span>
+								</h6>
+								<p class="list-group-item-text text-muted">
+									<i class="ft-check font-small-2"></i> Thank you
+									<span class="float-right primary">
+										<span class="badge badge-pill badge-primary">4</span>
+									</span>
+								</p>
 							</div>
-						</div>
-					</div>
-
-					<div *ngFor="let messageDetail of message.messages">
-						<div id="headingCollapse2" class="card-header p-0">
-							<a (click)="messageDetail.collapsed = !messageDetail.collapsed"
-								[attr.aria-expanded]="!messageDetail.collapsed" [attr.aria-controls]="messageDetail.messageId">
-								<div class="email-app-sender list-group-item list-group-item-action no-border">
-									<div class="media">
-										<span class="avatar avatar-md mr-2">
-											<span *ngIf="!messageDetail.hasAvatar"
-												class="media-object rounded-circle text-circle d-flex mr-2 justify-content-center align-items-center + ' ' + {{messageDetail.avatarClass}}">{{ messageDetail.avatarText }}</span>
-											<img *ngIf="messageDetail.hasAvatar" class="media-object rounded-circle"
-												[src]="messageDetail.avatarPath" alt="Generic placeholder image">
-										</span>
-										<div class="media-body text-left">
-											<h6 class="list-group-item-heading">{{messageDetail.mailFrom}}</h6>
-											<p class="list-group-item-text">to {{messageDetail.mailTo}}
-												<span class="primary">{{messageDetail.time}}</span>
-												<span class="float-right">
-													<i class="fa fa-reply mr-1"></i>
-													<i class="fa fa-arrow-right mr-1"></i>
-													<i class="fa fa-ellipsis-v"></i>
-												</span>
-											</p>
-
-										</div>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div [id]="messageDetail.messageId" [ngbCollapse]="messageDetail.collapsed">
-							<div class="card-body">
-								<div class="email-app-text card-block">
-									<div class="email-app-message text-left">
-										<div [innerHTML]="messageDetail.body">
-										</div>
-										<div *ngIf="messageDetail.hasAttachment">
-											<p class="primary">Attachments:</p>
-											<div *ngFor="let attachment of messageDetail.attachments" class="float-left mr-2">
-												<img class="media-object width-100" [src]="attachment.url" alt="Generic placeholder image">
-											</div>
-										</div>
-									</div>
-								</div>
+						</span>
+					</a>
+					<a class="list-group-item no-border" (click)="SetActive($event,'chat6')">
+						<span class="media">
+							<span class="avatar avatar-md avatar-busy">
+								<img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle"
+									src="assets/img/portrait/small/avatar-s-4.png" alt="Generic placeholder image">
+								<i></i>
+							</span>
+							<div class="media-body  text-left">
+								<h6 class="list-group-item-heading">Kelly Reyes
+									<span class="font-small-3 float-right primary">Thrusday</span>
+								</h6>
+								<p class="list-group-item-text text-muted">
+									<i class="ft-check font-small-2"></i> I love you </p>
 							</div>
-						</div>
-						<div class="email-app-text-action card-block">
-						</div>
-					</div>
-
-				</div>
-				<div class="email-app-mail-content-detail" *ngIf="!isMessageSelected">
-					<p class="primary text-center">Select a message to read</p>
+						</span>
+					</a>
+					<a class="list-group-item no-border" (click)="SetActive($event,'chat7')">
+						<span class="media">
+							<span class="avatar avatar-md avatar-online">
+								<img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle"
+									src="assets/img/portrait/small/avatar-s-14.png" alt="Generic placeholder image">
+								<i></i>
+							</span>
+							<div class="media-body  text-left">
+								<h6 class="list-group-item-heading">Vincent Nelson</h6>
+								<p class="list-group-item-text text-muted">
+									<i class="ft-check primary font-small-2"></i> Who you are?</p>
+							</div>
+						</span>
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="chat-name p-2 bg-white">
+		<div class="media">
+			<span
+				class="chat-app-sidebar-toggle ft-align-justify font-large-1 mr-2 d-none d-block d-sm-block d-md-none"></span>
+			<div class="media-body text-left">
+				<img [src]="[activeChatUserImg]" width="37" class="rounded-circle mr-1" alt="avatar" />
+				<span>{{ activeChatUser }}</span>
+				<i class="ft-more-vertical float-right mt-1"></i>
+			</div>
+		</div>
+	</div>
+	<section class="chat-app-window" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+		<div class="badge badge-dark mb-1">Chat History</div>
+		<div class="chats">
+			<div class="chats">
+				<div [ngClass]="[chat.chatClass]" *ngFor="let chat of chat">
+					<div class="chat-avatar">
+						<a class="avatar" data-toggle="tooltip" data-placement="[chat.avatar]" title="" data-original-title="">
+							<img [src]="[chat.imagePath]" class="width-50" alt="avatar" />
+						</a>
+					</div>
+					<div class="chat-body">
+						<div class="chat-content" *ngFor="let message of chat.messages">
+							<p *ngIf="chat.messageType === 'text'">{{ message }}</p>
+						</div>
+					</div>
+					<p class="time" *ngIf="chat.time !='' ">{{chat.time}}</p>
+				</div>
+
+				<div class="chat" *ngIf="messages.length > 0">
+					<div class="chat-avatar">
+						<a class="avatar" data-toggle="tooltip" data-placement="right" title="" data-original-title="">
+							<img src="assets/img/portrait/small/avatar-s-1.png" class="width-50" alt="avatar" />
+						</a>
+					</div>
+					<div class="chat-body">
+						<div class="chat-content" *ngFor="let message of messages">
+							<p>{{ message }}</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<section class="chat-app-form bg-blue-grey bg-lighten-5">
+		<form class="chat-app-input row">
+			<fieldset class="form-group position-relative has-icon-left col-xl-10 col-lg-8 col-8 m-0 mb-1">
+				<div class="form-control-position">
+					<i class="icon-emoticon-smile"></i>
+				</div>
+				<input type="text" class="form-control" id="iconLeft4" placeholder="Type your message"
+					(keydown.enter)="onAddMessage();$event.preventDefault()" #messageInput>
+				<div class="form-control-position control-position-right">
+					<i class="ft-image"></i>
+				</div>
+			</fieldset>
+			<fieldset class="form-group position-relative has-icon-left col-xl-2 col-lg-4 col-4 m-0 mb-1">
+				<button type="button" class="btn btn-raised btn-primary" (click)="onAddMessage()">
+					<i class="fa fa-paper-plane-o hidden-lg-up"></i> Send</button>
+			</fieldset>
+		</form>
+	</section>
 </div>

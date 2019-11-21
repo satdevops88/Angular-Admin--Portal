@@ -1,45 +1,92 @@
-import { Component, ElementRef } from '@angular/core';
-import { ApiService } from 'app/shared/api/api.service';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InboxService } from './inbox.service';
-import { Mail, Message } from './inbox.model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ChatService } from './chat.service';
+import { Chat } from './chat.model';
 
 @Component({
   selector: 'app-message-details',
   templateUrl: './message-details.component.html',
   styleUrls: ['./message-details.component.scss'],
-  providers: [InboxService]
+  providers: [ChatService]
 })
 export class MessageDetailsComponent {
 
-  public isMessageSelected = true;
-  mail: Mail[];
-  message: Message;
-  constructor(private elRef: ElementRef, private modalService: NgbModal, private inboxService: InboxService) {
-    this.mail = this.inboxService.inbox.filter((mail: Mail) => mail.mailType === 'Inbox');
-    this.message = this.inboxService.message.filter((message: Message) => message.mailId === 4)[0];
+  chat: Chat[];
+  activeChatUser: string;
+  activeChatUserImg: string;
+  @ViewChild('messageInput') messageInputRef: ElementRef;
+
+  messages = new Array();
+  item: number = 0;
+  constructor(private elRef: ElementRef, private chatService: ChatService) {
+    this.chat = chatService.chat1;
+    this.activeChatUser = "Elizabeth Elliott";
+    this.activeChatUserImg = "assets/img/portrait/small/avatar-s-3.png";
   }
 
   ngOnInit() {
-    $.getScript('./assets/js/inbox.js');
+    $.getScript('./assets/js/chat.js');
   }
 
-  DisplayMessage(event, mailId: number) {
-
-    this.message = this.inboxService.message.filter((message: Message) => message.mailId.toString() === mailId.toString())[0];
-    this.isMessageSelected = true;
-
+  //send button function calls
+  onAddMessage() {
+    if (this.messageInputRef.nativeElement.value != "") {
+      this.messages.push(this.messageInputRef.nativeElement.value);
+    }
+    this.messageInputRef.nativeElement.value = "";
+    this.messageInputRef.nativeElement.focus();
+  }
+  //chat user list click event function
+  SetActive(event, chatId: string) {
     var hElement: HTMLElement = this.elRef.nativeElement;
     //now you can simply get your elements with their class name
-    var allAnchors = hElement.querySelectorAll('.users-list-padding > a.list-group-item');
+    var allAnchors = hElement.getElementsByClassName('list-group-item');
     //do something with selected elements
     [].forEach.call(allAnchors, function (item: HTMLElement) {
-      item.setAttribute('class', 'list-group-item list-group-item-action no-border');
+      item.setAttribute('class', 'list-group-item no-border');
     });
     //set active class for selected item 
-    event.currentTarget.setAttribute('class', 'list-group-item list-group-item-action bg-blue-grey bg-lighten-5 border-right-primary border-right-2');
+    event.currentTarget.setAttribute('class', 'list-group-item bg-blue-grey bg-lighten-5 border-right-primary border-right-2');
+
+    this.messages = [];
+
+    if (chatId === 'chat1') {
+      this.chat = this.chatService.chat1;
+      this.activeChatUser = "Elizabeth Elliott";
+      this.activeChatUserImg = "assets/img/portrait/small/avatar-s-3.png";
+    }
+    else if (chatId === 'chat2') {
+      this.chat = this.chatService.chat2;
+      this.activeChatUser = "Kristopher Candy";
+      this.activeChatUserImg = "assets/img/portrait/small/avatar-s-7.png";
+    }
+    else if (chatId === 'chat3') {
+      this.chat = this.chatService.chat3;
+      this.activeChatUser = "Sarah Woods";
+      this.activeChatUserImg = "assets/img/portrait/small/avatar-s-8.png";
+    }
+    else if (chatId === 'chat4') {
+      this.chat = this.chatService.chat4;
+      this.activeChatUser = "Bruce Reid";
+      this.activeChatUserImg = "assets/img/portrait/small/avatar-s-5.png";
+    }
+    else if (chatId === 'chat5') {
+      this.chat = this.chatService.chat5;
+      this.activeChatUser = "Heather Howell";
+      this.activeChatUserImg = "assets/img/portrait/small/avatar-s-9.png";
+    }
+    else if (chatId === 'chat6') {
+      this.chat = this.chatService.chat6;
+      this.activeChatUser = "Kelly Reyes";
+      this.activeChatUserImg = "assets/img/portrait/small/avatar-s-4.png";
+    }
+    else if (chatId === 'chat7') {
+      this.chat = this.chatService.chat7;
+      this.activeChatUser = "Vincent Nelson";
+      this.activeChatUserImg = "assets/img/portrait/small/avatar-s-14.png";
+    }
 
   }
+
 
 }

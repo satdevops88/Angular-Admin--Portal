@@ -30,7 +30,7 @@ export const ROUTES: RouteInfo[] = [
         path: '/notification', title: 'Notification', icon: 'ft-clipboard', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
-        path: '/role-management', title: 'Role Mangement', icon: 'ft-layers', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+        path: '/role-management/set-permissions', title: 'Role Mangement', icon: 'ft-layers', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
         path: '/event-management', title: 'Event Management', icon: 'ft-align-justify', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
