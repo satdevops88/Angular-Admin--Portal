@@ -10,8 +10,11 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './update-admin.component.html',
   styleUrls: ['./update-admin.component.scss']
 })
+
 export class UpdateAdminComponent implements OnInit {
   @ViewChild('f') adminForm: NgForm;
+  roles = ["Admin", "Moderator", "Admin User"];
+  selectedRoles = "Admin";
   constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
 
   }
@@ -26,7 +29,9 @@ export class UpdateAdminComponent implements OnInit {
       })
     }, 100);
   }
-
+  onChangeRole(newValue) {
+    this.selectedRoles = newValue;
+  }
   onCancel() {
     this.router.navigate(['user-management/admins'])
   }

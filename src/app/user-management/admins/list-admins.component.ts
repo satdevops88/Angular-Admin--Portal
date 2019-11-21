@@ -11,15 +11,16 @@ import { ToastrService } from 'ngx-toastr';
 export class ListAdminsComponent {
 
   rows = [
-    { name: 'Michael', username: 'michael', joined: '1 January 2019', actions: '' },
-    { name: 'Shamnex', username: 'shamnex', joined: '4 April 2019', actions: '' },
-    { name: 'Sonxai', username: 'sonxai', joined: '11 November 2019', actions: '' },
+    { name: 'Michael', username: 'michael', role: 'Admin', joined: '1 January 2019', actions: '' },
+    { name: 'Shamnex', username: 'shamnex', role: 'Moderator', joined: '4 April 2019', actions: '' },
+    { name: 'Sonxai', username: 'sonxai', role: 'Admin User', joined: '11 November 2019', actions: '' },
   ];
   temp = [];
   columns = [
     { name: 'ID' },
     { name: 'Name' },
     { name: 'Username' },
+    { name: 'Role' },
     { name: 'Joined' },
     { name: 'Actions' }
   ];

@@ -66,6 +66,19 @@
                           </div>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label for="role">Role</label>
+                          <div ngbDropdown style="margin-top: 15px;">
+                            <button class="btn btn-outline-primary" id="dropdownBasic1"
+                              ngbDropdownToggle>{{selectedRoles}}</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                              <button *ngFor="let role of roles" class="dropdown-item"
+                                (click)="onChangeRole(role)">{{role}}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div class="form-actions right">
                       <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
