@@ -4,8 +4,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RoleManagementRoutingModule } from './role-management-routing.module';
-import { RoleManagementComponent } from './role-management/role-management.component';
 import { CreateRoleComponent } from './create-role/create-role.component';
+import { PermissionsManagementComponent } from './permissions-management/permissions-management.component';
+import { RolesManagementComponent } from './roles-management/roles-management.component';
+import { UpdateRoleComponent } from './update-role/update-role.component';
 
 
 
@@ -20,8 +22,10 @@ import { CreateRoleComponent } from './create-role/create-role.component';
     ],
     exports: [],
     declarations: [
-        RoleManagementComponent,
-        CreateRoleComponent
+        PermissionsManagementComponent,
+        CreateRoleComponent,
+        RolesManagementComponent,
+        UpdateRoleComponent
     ],
     providers: [],
 })

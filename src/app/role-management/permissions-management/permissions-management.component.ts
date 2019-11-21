@@ -4,11 +4,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-role-management',
-  templateUrl: './role-management.component.html',
-  styleUrls: ['./role-management.component.scss']
+  selector: 'app-permissions-management',
+  templateUrl: './permissions-management.component.html',
+  styleUrls: ['./permissions-management.component.scss']
 })
-export class RoleManagementComponent {
+export class PermissionsManagementComponent {
 
   rows = [
     { roles: "Manage advertisement placement", type: "title", anonymous_admin: false, authenticated_admin: true, administrator: true },
@@ -79,10 +79,9 @@ export class RoleManagementComponent {
   temp = [];
   columns = [
     { name: 'Roles' },
-    { name: 'ANONYMOUS ADMIN' },
-    { name: 'AUTHENTICATED ADMIN' },
-    { name: 'ADMINISTRATOR' },
-    { name: 'Actions' }
+    { name: 'Admin' },
+    { name: 'Moderator' },
+    { name: 'Admin User' }
   ];
   selected = [];
   constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
@@ -104,13 +103,5 @@ export class RoleManagementComponent {
       return d.roles.toLowerCase().indexOf(val) !== -1 || !val;
     });
     this.rows = temp;
-  }
-
-  onDelete(rowIndex) {
-    this.toastr.success("Deleted Successfully", "Success");
-  }
-
-  onCreateRole() {
-    this.router.navigate(['role-management/create-role']);
   }
 }

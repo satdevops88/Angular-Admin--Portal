@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RoleManagementComponent } from './role-management/role-management.component';
 import { CreateRoleComponent } from './create-role/create-role.component';
+import { PermissionsManagementComponent } from './permissions-management/permissions-management.component';
+import { RolesManagementComponent } from './roles-management/roles-management.component';
+import { UpdateRoleComponent } from './update-role/update-role.component';
 
 
 const routes: Routes = [
@@ -9,10 +11,10 @@ const routes: Routes = [
         path: '',
         children: [
             {
-                path: 'set-permissions',
-                component: RoleManagementComponent,
+                path: 'permissions-management',
+                component: PermissionsManagementComponent,
                 data: {
-                    title: 'Set Permission'
+                    title: 'Permissions Management'
                 }
             },
             {
@@ -20,6 +22,20 @@ const routes: Routes = [
                 component: CreateRoleComponent,
                 data: {
                     title: 'Create Role'
+                }
+            },
+            {
+                path: 'roles-management',
+                component: RolesManagementComponent,
+                data: {
+                    title: 'Roles Management'
+                }
+            },
+            {
+                path: 'update-role/:roleID',
+                component: UpdateRoleComponent,
+                data: {
+                    title: 'Update Role'
                 }
             }
         ]

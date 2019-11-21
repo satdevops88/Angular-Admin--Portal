@@ -1,0 +1,42 @@
+<section id="basic-form-layouts">
+	<div class="row text-left">
+		<div class="col-sm-12">
+			<div class="content-header">Roles Management</div>
+		</div>
+	</div>
+</section>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header" style="display: flex;">
+				<input type="text" style="padding:5px;margin:15px;width:30%;" placeholder="Type to filter the Role ..."
+					(keyup)="updateFilter($event)" />
+				<button type="button" class="btn btn-primary btn-round btn-raised" style="margin-top: 15px;"
+					(click)="onCreateRole()"> Create Roles</button>
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
+						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows" [selected]="selected"
+						[selectionType]="'checkbox'" (select)="onSelect($event)">
+						<ngx-datatable-column name="ID">
+							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+								{{rowIndex + 1}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Roles"> </ngx-datatable-column>
+						<ngx-datatable-column name="Actions">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<button type="button" class="btn btn-outline-primary btn-round" style="margin-left: 10px;"
+									(click)="onUpdateRole(rowIndex)">Update</button>
+								<button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
+									(click)="onDeleteRole(rowIndex)">Delete</button>
+							</ng-template>
+						</ngx-datatable-column>
+					</ngx-datatable>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

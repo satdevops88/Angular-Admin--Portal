@@ -11,8 +11,6 @@
 			<div class="card-header" style="display: flex;">
 				<input type="text" style="padding:5px;margin:15px;width:30%;" placeholder="Type to filter the Role ..."
 					(keyup)="updateFilter($event)" />
-				<button type="button" class="btn btn-primary btn-round btn-raised" style="margin-top: 15px;"
-					(click)="onCreateRole()"> Create Roles</button>
 			</div>
 			<div class="card-body">
 				<div class="card-block">
@@ -28,34 +26,28 @@
 								</div>
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="ANONYMOUS ADMIN">
+						<ngx-datatable-column name="Admin">
 							<ng-template let-row="row" ngx-datatable-cell-template>
-								<div *ngIf="row.anonymous_admin != 'none'" style="padding-left: 45px;">
+								<div *ngIf="row.anonymous_admin != 'none'" style="padding-left: 15px;">
 									<input type="checkbox" [checked]="row.anonymous_admin"
 										(change)="row.anonymous_admin = !row.anonymous_admin" />
 								</div>
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="AUTHENTICATED ADMIN">
+						<ngx-datatable-column name="Moderator">
 							<ng-template let-row="row" ngx-datatable-cell-template>
-								<div *ngIf="row.authenticated_admin != 'none'" style="padding-left: 45px;">
+								<div *ngIf="row.authenticated_admin != 'none'" style="padding-left: 25px;">
 									<input type="checkbox" [checked]="row.authenticated_admin"
 										(change)="row.authenticated_admin = !row.authenticated_admin" />
 								</div>
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="ADMINISTRATOR">
+						<ngx-datatable-column name="Admin User">
 							<ng-template let-row="row" ngx-datatable-cell-template>
-								<div *ngIf="row.administrator != 'none'" style="padding-left: 45px;">
+								<div *ngIf="row.administrator != 'none'" style="padding-left: 25px;">
 									<input type="checkbox" [checked]="row.administrator"
 										(change)="row.administrator = !row.administrator" />
 								</div>
-							</ng-template>
-						</ngx-datatable-column>
-						<ngx-datatable-column name="Actions">
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-								<button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
-									(click)="onDelete(rowIndex)">Delete</button>
 							</ng-template>
 						</ngx-datatable-column>
 					</ngx-datatable>

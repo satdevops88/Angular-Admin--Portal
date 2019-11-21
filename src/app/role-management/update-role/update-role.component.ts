@@ -4,27 +4,31 @@ import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-create-role',
-  templateUrl: './create-role.component.html',
-  styleUrls: ['./create-role.component.scss']
+  selector: 'app-update-role',
+  templateUrl: './update-role.component.html',
+  styleUrls: ['./update-role.component.scss']
 })
-export class CreateRoleComponent {
+export class UpdateRoleComponent {
 
-  @ViewChild('f') newsForm: NgForm;
+  @ViewChild('f') rolesForm: NgForm;
 
   constructor(private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
 
   }
 
   ngOnInit() {
-
+    setTimeout(() => {
+      this.rolesForm.setValue({
+        role: "Admin"
+      })
+    }, 100);
   }
 
   onCancel() {
     this.router.navigate(['role-management/roles-management']);
   }
-  onCreate() {
+  onUpdate() {
     this.router.navigate(['role-management/roles-management']);
-    this.toastr.success('Created Role Successfully', 'Success');
+    this.toastr.success('Update Role Successfully', 'Success');
   }
 }
