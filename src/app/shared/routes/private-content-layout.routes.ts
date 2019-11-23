@@ -4,7 +4,6 @@ import { ProfileComponent } from 'app/profile/profile.component';
 import { UserPostComponent } from 'app/user-post/user-post.component';
 import { NotificationComponent } from 'app/notification/notification.component';
 import { AdvertisementComponent } from 'app/advertisement/advertisement.component';
-import { EventManagementComponent } from 'app/event-management/event-management.component';
 import { ReportManagementComponent } from 'app/report-management/report-management.component';
 
 //Route for content layout with sidebar, navbar and footer
@@ -51,7 +50,7 @@ export const PRIVATE_CONTENT_ROUTES: Routes = [
   },
   {
     path: 'event-management',
-    component: EventManagementComponent
+    loadChildren: './event-management/event-management.module#EventManagementModule'
   },
   {
     path: 'report-management',

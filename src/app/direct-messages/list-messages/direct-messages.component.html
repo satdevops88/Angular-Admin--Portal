@@ -18,8 +18,6 @@
 				</div>
 				<input type="text" style="padding:5px;margin:15px;width:30%;" placeholder="Type to filter the User ..."
 					(keyup)="updateFilter($event)" />
-				<button type="button" class="btn btn-primary btn-round btn-raised" style="margin-top: 15px;"
-					(click)="onViewMessages()"> View Details</button>
 			</div>
 			<div class="card-body">
 				<div class="card-block">
@@ -48,6 +46,13 @@
 									(click)="onInvisible(rowIndex)">Invisible</span>
 							</ng-template>
 						</ngx-datatable-column>
+						<ngx-datatable-column name="Actions" [width]="300">
+							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+								<button type="button" class="btn btn-outline-success btn-round" (click)="onViewMessages(rowIndex)">
+									View Details</button>
+							</ng-template>
+						</ngx-datatable-column>
+
 					</ngx-datatable>
 				</div>
 			</div>

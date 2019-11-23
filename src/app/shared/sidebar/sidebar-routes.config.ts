@@ -36,7 +36,7 @@ export const ROUTES: RouteInfo[] = [
         ]
     },
     {
-        path: '/event-management', title: 'Event Management', icon: 'ft-align-justify', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+        path: '/event-management/list-events', title: 'Event Management', icon: 'ft-align-justify', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
         path: '/report-management', title: 'Reports Management', icon: 'ft-alert-octagon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []

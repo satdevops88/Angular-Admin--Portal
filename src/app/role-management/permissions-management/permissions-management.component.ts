@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ApiService } from 'app/shared/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
