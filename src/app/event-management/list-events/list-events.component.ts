@@ -10,24 +10,22 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListEventsComponent {
 
-  rows = [
-    { roles: "Admin" },
-    { roles: "Moderator" },
-    { roles: "Admin User" }
+  events = [
+    { name: "event1", avatar: "assets/img/portrait/medium/avatar-m-22.png", img: "assets/img/gallery/2.jpg" },
+    { name: "event2", avatar: "assets/img/portrait/medium/avatar-m-21.png", img: "assets/img/gallery/3.jpg" },
+    { name: "event3", avatar: "assets/img/portrait/medium/avatar-m-20.png", img: "assets/img/gallery/4.jpg" },
+    { name: "event4", avatar: "assets/img/portrait/medium/avatar-m-19.png", img: "assets/img/gallery/5.jpg" },
+    { name: "event5", avatar: "assets/img/portrait/medium/avatar-m-18.png", img: "assets/img/gallery/6.jpg" },
+    { name: "event6", avatar: "assets/img/portrait/medium/avatar-m-17.png", img: "assets/img/gallery/7.jpg" },
   ];
   temp = [];
-  columns = [
-    { name: 'ID' },
-    { name: 'Roles' },
-    { name: 'Actions' }
-  ];
   selected = [];
   constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    this.temp = [...this.rows];
+    this.temp = [...this.events];
   }
 
   onSelect({ selected }) {
@@ -38,17 +36,17 @@ export class ListEventsComponent {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.temp.filter(function (d) {
-      return d.roles.toLowerCase().indexOf(val) !== -1 || !val;
+      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
     });
-    this.rows = temp;
+    this.events = temp;
   }
 
-  onDeleteRole(rowIndex) {
-    this.toastr.success("Deleted Successfully", "Success");
+  onUpdateEvent(row) {
+    this.router.navigate(['event-management/update-event/133223']);
   }
 
-  onUpdateRole(rowIndex) {
-    this.router.navigate(['event-management/update-event/2']);
+  onDeleteEvent(row) {
+    this.toastr.success('Deleted Successfully', 'Success');
   }
 
   onCreateRole() {

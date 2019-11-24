@@ -19,7 +19,10 @@ export class UpdateEventComponent {
   ngOnInit() {
     setTimeout(() => {
       this.eventForm.setValue({
-        event: "Admin"
+        eventname: "Weekend Party",
+        startdate: "2019-11-24",
+        enddate: "2019-11-25",
+        details: "This is weekend Party. Thank you very much!"
       })
     }, 100);
   }
@@ -29,6 +32,6 @@ export class UpdateEventComponent {
   }
   onUpdate() {
     this.router.navigate(['event-management/list-events']);
-    this.toastr.success('Update Role Successfully', 'Success');
+    this.toastr.success('Update Event Successfully', 'Success');
   }
 }

@@ -17,24 +17,104 @@
 			</div>
 			<div class="card-body">
 				<div class="card-block">
-					<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
-						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows" [selected]="selected"
-						[selectionType]="'checkbox'" (select)="onSelect($event)">
-						<ngx-datatable-column name="ID">
-							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-								{{rowIndex + 1}}
-							</ng-template>
-						</ngx-datatable-column>
-						<ngx-datatable-column name="Roles"> </ngx-datatable-column>
-						<ngx-datatable-column name="Actions">
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-								<button type="button" class="btn btn-outline-primary btn-round" style="margin-left: 10px;"
-									(click)="onUpdateRole(rowIndex)">Update</button>
-								<button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
-									(click)="onDeleteRole(rowIndex)">Delete</button>
-							</ng-template>
-						</ngx-datatable-column>
-					</ngx-datatable>
+					<div class="row">
+						<div class="col-md-3" *ngFor="let event of events">
+							<div class="card event-card">
+								<div class="card-header">
+									<div class="media">
+										<img class="mr-3 img-fluid" src="{{event.avatar}}" alt="placeholder image" width="40" height="40"
+											style="border-radius: 20px;">
+										<div class="media-body">
+											<h3 class="mt-0">By John Doe</h3>
+											<p>5 min ago</p>
+										</div>
+										<div ngbDropdown style="margin-top: 10px;">
+											<div id="dropdownBasic1" ngbDropdownToggle style="cursor: pointer;">
+												<i class="fa fa-ellipsis-v"></i>
+											</div>
+											<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+												<button class="dropdown-item" (click)="onUpdateEvent(event)">Update</button>
+												<button class="dropdown-item" (click)="onDeleteEvent(event)">Delete</button>
+												<button class="dropdown-item" (click)="onSuspendEvent(event)">Suspend</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="event-card-img">
+									<img class="img-fluid" src="{{event.img}}" alt="placeholder image" style="width:100%; height:220px;">
+									<h4>{{event.name}}</h4>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-auto">
+											<h5>Date</h5>
+											<p>June 16, 2018</p>
+										</div>
+										<div class="col-auto">
+											<h5>Location</h5>
+											<p>New York</p>
+										</div>
+										<div class="col-auto">
+											<h5>Tickets</h5>
+											<p>Avilable 26/ 100</p>
+										</div>
+									</div>
+								</div>
+								<div class="card-sponsor">
+									<div class="row justify-content-between">
+										<div class="col-auto">
+											<h4>Sponsor by</h4>
+											<div class="card-sponsor-img">
+												<a href="javascript:;">
+													<img class="img-fluid" src="assets/img/portrait/medium/avatar-m-13.png"
+														alt="placeholder image" width="30" style="border-radius: 20px;">
+												</a>
+												<a href="javascript:;">
+													<img class="img-fluid" src="assets/img/portrait/medium/avatar-m-14.png"
+														alt="placeholder image" width="30" style="border-radius: 20px;">
+												</a>
+												<a href="javascript:;">
+													<img class="img-fluid" src="assets/img/portrait/medium/avatar-m-15.png"
+														alt="placeholder image" width="30" style="border-radius: 20px;">
+												</a>
+												<a href="javascript:;">
+													<img class="img-fluid" src="assets/img/portrait/medium/avatar-m-16.png"
+														alt="placeholder image" width="30" style="border-radius: 20px;">
+												</a>
+											</div>
+										</div>
+										<div class="col-auto">
+											<p>Free</p>
+										</div>
+									</div>
+								</div>
+								<div class="card-footer">
+									<ul>
+										<li>
+											<a href="javascript:;">
+												<i class="fa fa-heart"></i>126
+											</a>
+										</li>
+										<li>
+											<a href="javascript:;">
+												<i class="fa fa-comment"></i>03
+											</a>
+										</li>
+										<li>
+											<a href="javascript:;">
+												<i class="fa fa-sign-out"></i>
+											</a>
+										</li>
+									</ul>
+									<div class="pull-right">
+										<a href="javascript:;">
+											<i class="fa fa-bar-chart"></i>Insights</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>

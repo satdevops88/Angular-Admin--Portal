@@ -13,14 +13,39 @@
 					<form class="form" #f="ngForm">
 						<div class="form-body">
 							<div class="row">
-								<div class="col-md-3"></div>
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<div class="form-group">
-										<label for="role">Role</label>
-										<input type="text" id="role" class="form-control" name="role" ngModel required>
+										<label for="eventname">Event Name</label>
+										<input type="text" id="eventname" class="form-control" name="eventname" ngModel required>
 									</div>
 								</div>
-								<div class="col-md-3"></div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="startdate">Start Date</label>
+										<input type="text" id="startdate" class="form-control" name="startdate" ngModel required>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="enddate">End Date</label>
+										<input type="text" id="enddate" class="form-control" name="enddate" ngModel required>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="image">Event Image</label>
+										<div class="custom-file center-block d-block">
+											<input type="file" class="custom-file-input" id="eventimage">
+											<label class="custom-file-label" for="eventimage">Choose file</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="details">Event Details</label>
+										<textarea rows="7" class="form-control" id="details" name="details" ngModel></textarea>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="form-actions right">

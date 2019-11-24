@@ -25,6 +25,6 @@ export class CreateEventComponent {
   }
   onCreate() {
     this.router.navigate(['event-management/list-events']);
-    this.toastr.success('Created Role Successfully', 'Success');
+    this.toastr.success('Created Event Successfully', 'Success');
   }
 }
