@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   // URL of development API - to be replaced with custom domain name
-  apiUrl: 'https://u8fxhq0s03.execute-api.eu-central-1.amazonaws.com/dev/v1/services/'
+  curl: 'https://tontrends-gateway-staging.herokuapp.com/tontrends-gateway-service/api/v1/graphql'
 };

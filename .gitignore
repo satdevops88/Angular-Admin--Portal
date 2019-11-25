@@ -11,6 +11,9 @@
 #dump
 /package-lock.json
 
+#environments
+/src/environments
+
 # styles and images
 /src/assets/sass
 /src/assets/css

@@ -14,9 +14,8 @@ import { PublicContentLayoutComponent } from "./layouts/public-content/public-co
 import { PrivateContentLayoutComponent } from "./layouts/private-content/private-content-layout.component";
 
 import { AuthService } from './shared/auth/auth.service';
-import { StorageService } from './shared/api/storage.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
-import { ApiService, RequestInterceptor } from './shared/api/api.service';
+import { ApiService } from './shared/api/api.service';
 
 import * as $ from 'jquery';
 import { LoginComponent } from './login/login.component';
@@ -27,6 +26,7 @@ import { AdvertisementComponent } from './advertisement/advertisement.component'
 import { UserPostComponent } from './user-post/user-post.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ReportManagementComponent } from './report-management/report-management.component';
+import { GraphQLModule } from './graphql.module';
 
 
 @NgModule({
@@ -51,18 +51,13 @@ import { ReportManagementComponent } from './report-management/report-management
         HttpClientModule,
         ToastrModule.forRoot(),
         ChartistModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        GraphQLModule
     ],
     providers: [
         AuthService,
         AuthGuard,
-        StorageService,
         ApiService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: RequestInterceptor,
-            multi: true
-        }
     ],
     bootstrap: [AppComponent]
 })

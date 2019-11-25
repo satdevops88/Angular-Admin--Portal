@@ -28,7 +28,7 @@
 						<ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
 							[resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
 						</ngx-datatable-column>
-						<ngx-datatable-column name="ID" [width]="50">
+						<ngx-datatable-column name="Index" [width]="70">
 							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
 								{{rowIndex + 1}}
 							</ng-template>
@@ -39,6 +39,9 @@
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Author">
+							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+								{{row.source}}
+							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Categories">
 							<ng-template let-column="column" ngx-datatable-header-template>
@@ -46,13 +49,25 @@
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Comments">
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-								<a [routerLink]="['/news-management/news-details/1211-2323-2342']">{{value}}</a>
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								<a [routerLink]="['/news-management/news-details/1211-2323-2342']">{{row.comments}}</a>
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Date"> </ngx-datatable-column>
-						<ngx-datatable-column name="ID"> </ngx-datatable-column>
-						<ngx-datatable-column name="Views"> </ngx-datatable-column>
+						<ngx-datatable-column name="Date">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.created_at | date: 'dd/MM/yyyy'}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="ID" [width]="250">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row._id}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Views">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.view_count}}
+							</ng-template>
+						</ngx-datatable-column>
 						<ngx-datatable-column name="Active">
 							<ng-template let-column="column" ngx-datatable-header-template>
 								Published/Draft
