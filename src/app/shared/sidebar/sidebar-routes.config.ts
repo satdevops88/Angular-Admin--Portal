@@ -27,9 +27,6 @@ export const ROUTES: RouteInfo[] = [
         path: '/direct-message/all', title: 'Direct Messages', icon: 'ft-message-square', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
-        path: '/notification', title: 'Notification', icon: 'ft-clipboard', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
-    },
-    {
         path: '/', title: 'Role Mangement', icon: 'ft-layers', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
             { path: '/role-management/roles-management', title: 'Roles', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
             { path: '/role-management/permissions-management', title: 'Permissions', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
@@ -40,6 +37,9 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '/report-management', title: 'Reports Management', icon: 'ft-alert-octagon', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },
+    {
+        path: '/notification', title: 'Notification', icon: 'ft-clipboard', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     }
 
 ];

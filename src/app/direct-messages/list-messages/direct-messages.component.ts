@@ -41,7 +41,7 @@ export class DirectMessagesComponent {
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
     const temp = this.temp.filter(function (d) {
-      return (d.title + d.author).toLowerCase().indexOf(val) !== -1 || !val;
+      return (d.user1 + d.user2).toLowerCase().indexOf(val) !== -1 || !val;
     });
     this.rows = temp;
   }

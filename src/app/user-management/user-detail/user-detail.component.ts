@@ -18,4 +18,9 @@ export class UserDetailComponent {
 
   }
 
+  onUpdateProfile() {
+    this.router.navigate(['user-management/users']);
+    this.toastr.success("Updated Successfully", "Success");
+  }
+
 }
