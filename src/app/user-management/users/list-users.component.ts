@@ -1,7 +1,21 @@
 import { Component } from '@angular/core';
-import { ApiService } from 'app/shared/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
+import gql from 'graphql-tag';
+import { Apollo, QueryRef } from 'apollo-angular';
+
+const GET_ALL_USERS = gql`
+  {
+    getAllUsers(page: 10, limit: 10) {
+      _id
+      first_name
+      middle_name
+      last_name
+      display_name
+      email_address
+      created_at
+    }
+  }
+`;
 
 @Component({
   selector: 'app-list-users',
@@ -10,21 +24,22 @@ import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 })
 export class ListUsersComponent {
 
-  rows = [
-    { name: 'Zamblek Author', username: 'zamblek', joined: '4 April 2019', activated: true, actions: '' },
-    { name: 'Demo Admin', username: 'demo.admin', joined: '4 April 2019', activated: true, actions: '' },
-    { name: 'Lucas Lucas', username: 'lucaslucas', joined: '12 September 2019', activated: false, actions: '' },
-    { name: 'Estre Seryrey', username: 'wrtwetewt', joined: '12 September 2019', activated: false, actions: '' },
-    { name: 'Michael Wijaya', username: 'michaelwijaya', joined: '12 September 2019', activated: true, actions: '' },
-    { name: 'Jzofer Lamans', username: 'lamans', joined: '4 April 2019', activated: true, actions: '' },
-    { name: 'Air Cat', username: 'AirCat', joined: '29 July 2019', activated: false, actions: '' },
-    { name: 'Ronaldo Reis', username: 'sprinth', joined: '26 July 2019', activated: true, actions: '' },
-    { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-    { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-    { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-    { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-    { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-  ];
+  // rows = [
+  // { name: 'Zamblek Author', username: 'zamblek', joined: '4 April 2019', activated: true, actions: '' },
+  // { name: 'Demo Admin', username: 'demo.admin', joined: '4 April 2019', activated: true, actions: '' },
+  // { name: 'Lucas Lucas', username: 'lucaslucas', joined: '12 September 2019', activated: false, actions: '' },
+  // { name: 'Estre Seryrey', username: 'wrtwetewt', joined: '12 September 2019', activated: false, actions: '' },
+  // { name: 'Michael Wijaya', username: 'michaelwijaya', joined: '12 September 2019', activated: true, actions: '' },
+  // { name: 'Jzofer Lamans', username: 'lamans', joined: '4 April 2019', activated: true, actions: '' },
+  // { name: 'Air Cat', username: 'AirCat', joined: '29 July 2019', activated: false, actions: '' },
+  // { name: 'Ronaldo Reis', username: 'sprinth', joined: '26 July 2019', activated: true, actions: '' },
+  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
+  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
+  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
+  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
+  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
+  // ];
+  rows = [];
   temp = [];
   columns = [
     { name: 'ID' },
@@ -34,12 +49,22 @@ export class ListUsersComponent {
     { name: 'Activated' },
     { name: 'Actions' }
   ];
+  private query: QueryRef<any>;
 
-  constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute) {
+  constructor(private apollo: Apollo, private router: Router, private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
+    this.query = this.apollo.watchQuery({
+      query: GET_ALL_USERS,
+      variables: {}
+    });
+
+    this.query.valueChanges.subscribe(result => {
+      this.rows = result.data && result.data.getAllUsers;
+      console.log('this.rows', this.rows);
+    });
     this.temp = [...this.rows];
   }
 
