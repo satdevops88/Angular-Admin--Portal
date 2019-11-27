@@ -3,19 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import gql from 'graphql-tag';
 import { Apollo, QueryRef } from 'apollo-angular';
 
-const GET_ALL_USERS = gql`
-  {
-    getAllUsers(page: 10, limit: 10) {
-      _id
-      first_name
-      middle_name
-      last_name
-      display_name
-      email_address
-      created_at
-    }
-  }
-`;
 
 @Component({
   selector: 'app-list-users',
@@ -24,47 +11,35 @@ const GET_ALL_USERS = gql`
 })
 export class ListUsersComponent {
 
-  // rows = [
-  // { name: 'Zamblek Author', username: 'zamblek', joined: '4 April 2019', activated: true, actions: '' },
-  // { name: 'Demo Admin', username: 'demo.admin', joined: '4 April 2019', activated: true, actions: '' },
-  // { name: 'Lucas Lucas', username: 'lucaslucas', joined: '12 September 2019', activated: false, actions: '' },
-  // { name: 'Estre Seryrey', username: 'wrtwetewt', joined: '12 September 2019', activated: false, actions: '' },
-  // { name: 'Michael Wijaya', username: 'michaelwijaya', joined: '12 September 2019', activated: true, actions: '' },
-  // { name: 'Jzofer Lamans', username: 'lamans', joined: '4 April 2019', activated: true, actions: '' },
-  // { name: 'Air Cat', username: 'AirCat', joined: '29 July 2019', activated: false, actions: '' },
-  // { name: 'Ronaldo Reis', username: 'sprinth', joined: '26 July 2019', activated: true, actions: '' },
-  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-  // { name: 'Dmas Mad', username: 'Damsmas18', joined: '4 April 2019', activated: true, actions: '' },
-  // ];
   rows = [];
   temp = [];
-  columns = [
-    { name: 'ID' },
-    { name: 'Name' },
-    { name: 'Username' },
-    { name: 'Joined' },
-    { name: 'Activated' },
-    { name: 'Actions' }
-  ];
+  page = {
+    totalElements: 100,
+    pageNumber: 0,
+    size: 10
+  }
   private query: QueryRef<any>;
+  GET_ALL_USERS = gql`
+    query getAllUsers($page: Int){
+      getAllUsers(page: $page, limit: 20) {
+        _id
+        first_name
+        middle_name
+        last_name
+        display_name
+        email_address
+        created_at
+      }
+    }
+  `;
 
   constructor(private apollo: Apollo, private router: Router, private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    this.query = this.apollo.watchQuery({
-      query: GET_ALL_USERS,
-      variables: {}
-    });
-
-    this.query.valueChanges.subscribe(result => {
-      this.rows = result.data && result.data.getAllUsers;
-      console.log('this.rows', this.rows);
-    });
+    console.log('this.page', this.page);
+    this.setPage({ offset: 1 })
     this.temp = [...this.rows];
   }
 
@@ -90,6 +65,23 @@ export class ListUsersComponent {
       return d.name.toLowerCase().indexOf(val) !== -1 || !val;
     });
     this.rows = temp;
+  }
+
+  setPage(pageInfo) {
+    console.log('pageInfo', pageInfo);
+    this.page.pageNumber = pageInfo.offset;
+
+    this.query = this.apollo.watchQuery({
+      query: this.GET_ALL_USERS,
+      variables: {
+        page: 2
+      },
+    });
+    this.query.valueChanges.subscribe(result => {
+      console.log('result', result);
+      this.rows = result.data && result.data.getAllUsers;
+    });
+
   }
 
 }

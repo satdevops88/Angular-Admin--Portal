@@ -15,20 +15,35 @@
       </div>
       <div class="card-body">
         <div class="card-block">
-          <ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
-            [rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows">
+          <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="60"
+            [footerHeight]="50" [limit]="10" [rows]="rows" [externalPaging]="true" [count]="page.totalElements"
+            [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
             <ngx-datatable-column name="ID" [width]="50">
               <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
                 {{rowIndex + 1}}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Name">
-              <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-                <a [routerLink]="['/user-management/user-detail/123456']">{{value}}</a>
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <a [routerLink]="['/user-management/user-detail/', row._id]">{{row.first_name}}
+                  {{row.last_name}}</a>
               </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Username"></ngx-datatable-column>
-            <ngx-datatable-column name="Joined"></ngx-datatable-column>
+            <ngx-datatable-column name="Username">]
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.display_name}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Email">]
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.email_address}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Joined">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.created_at | date: 'dd/MM/yyyy'}}
+              </ng-template>
+            </ngx-datatable-column>
             <ngx-datatable-column name="Activated">
               <ng-template let-column="column" ngx-datatable-header-template>
                 Blocked/Unblocked
