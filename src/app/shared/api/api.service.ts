@@ -6,10 +6,9 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
     private apiBaseUrl: string;
-    private actionUrl: string;
-    private service: string;
 
     constructor(private http: HttpClient) {
+
     }
 
 }

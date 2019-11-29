@@ -20,7 +20,7 @@
             [offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
             <ngx-datatable-column name="ID" [width]="50">
               <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                {{rowIndex + 1}}
+                {{page.pageNumber * 10 + rowIndex + 1}}
               </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Name">
@@ -48,11 +48,11 @@
               <ng-template let-column="column" ngx-datatable-header-template>
                 Blocked/Unblocked
               </ng-template>
-              <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-                <span *ngIf="value" class="badge badge-pill badge-lg badge-success" style="cursor: pointer;"
-                  (click)="onBlock(rowIndex)">Unblocked</span>
-                <span *ngIf="!value" class="badge badge-pill badge-lg badge-danger" style="cursor: pointer;"
-                  (click)="onUnblock(rowIndex)">Blocked</span>
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="row.status=='active'" class="badge badge-pill badge-lg badge-success"
+                  style="cursor: pointer;" (click)="onBlock(rowIndex)">Unblocked</span>
+                <span *ngIf="row.status!='active'" class="badge badge-pill badge-lg badge-danger"
+                  style="cursor: pointer;" (click)="onUnblock(rowIndex)">Blocked</span>
               </ng-template>
             </ngx-datatable-column>
           </ngx-datatable>

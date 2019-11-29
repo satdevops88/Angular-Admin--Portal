@@ -27,6 +27,7 @@ import { UserPostComponent } from './user-post/user-post.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ReportManagementComponent } from './report-management/report-management.component';
 import { GraphQLModule } from './graphql.module';
+import { UserApiService } from 'services/userApi';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { GraphQLModule } from './graphql.module';
         AuthService,
         AuthGuard,
         ApiService,
+        UserApiService
     ],
     bootstrap: [AppComponent]
 })
