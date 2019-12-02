@@ -10,18 +10,19 @@
     <div class="card">
       <div class="card-body">
         <div class="mt-4" align="center">
-          <img src="/assets/img/portrait/medium/avatar-blank.png" class="rounded-circle" width="150">
+          <img *ngIf="!avatar" src="/assets/img/portrait/medium/avatar-blank.png" class="rounded-circle" width="150">
+          <img *ngIf="avatar" src="{{avatar}}" class="rounded-circle" width="150">
           <h4 class="card-title mt-2">{{userInfo.first_name}} {{userInfo.middle_name}} {{userInfo.last_name}}</h4>
           <h6 class="card-subtitle">{{userInfo.display_name}}</h6>
           <div class="row text-center justify-content-md-center">
             <div class="col-4">
-              <a href="javascript:void(0)" class="link"><i class="icon-users"></i>
-                <span class="font-medium">{{userInfo.followers}}</span>
+              <a href="javascript:void(0)" class="link" title="followers"><i class="icon-users"></i>
+                <span class="font-medium"> {{userInfo.followers}}</span>
               </a>
             </div>
             <div class="col-4">
-              <a href="javascript:void(0)" class="link"><i class="icon-like"></i>
-                <span class="font-medium">{{userInfo.followings}}</span>
+              <a href="javascript:void(0)" class="link" title="followings"><i class="icon-like"></i>
+                <span class="font-medium"> {{userInfo.followings}}</span>
               </a>
             </div>
           </div>
@@ -136,55 +137,58 @@
                 <div class="row">
                   <div class="col-md-3 col-xs-6 b-r"> <strong>Full Name</strong>
                     <br>
-                    <p class="text-muted">Johnathan Deo</p>
+                    <p class="text-muted">{{userInfo.first_name}} {{userInfo.middle_name}} {{userInfo.last_name}}</p>
                   </div>
                   <div class="col-md-3 col-xs-6 b-r"> <strong>Mobile</strong>
                     <br>
-                    <p class="text-muted">(123) 456 7890</p>
+                    <p class="text-muted">{{userInfo.phone_number}}</p>
                   </div>
-                  <div class="col-md-3 col-xs-6 b-r"> <strong>Email</strong>
+                  <div class="col-md-4 col-xs-6 b-r"> <strong>Email</strong>
                     <br>
-                    <p class="text-muted">johnathan@admin.com</p>
+                    <p class="text-muted">{{userInfo.email_address}}</p>
                   </div>
-                  <div class="col-md-3 col-xs-6"> <strong>Location</strong>
+                  <div class="col-md-2 col-xs-6"> <strong>Country</strong>
                     <br>
-                    <p class="text-muted">London</p>
+                    <p class="text-muted">{{userInfo.country}}</p>
                   </div>
                 </div>
               </ng-template>
             </ngb-tab>
             <ngb-tab title="Setting">
               <ng-template ngbTabContent>
-                <form class="form-horizontal form-material">
+                <form class="form-horizontal form-material" #f="ngForm">
                   <div class="form-group">
-                    <label class="col-md-12">Full Name</label>
+                    <label class="col-md-12">First Name</label>
                     <div class="col-md-12">
-                      <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
+                      <input type="text" placeholder="First Name" class="form-control form-control-line"
+                        name="first_name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-12">Last Name</label>
+                    <div class="col-md-12">
+                      <input type="text" placeholder="Last Name" class="form-control form-control-line"
+                        name="last_name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="example-email" class="col-md-12">Email</label>
                     <div class="col-md-12">
-                      <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line"
-                        name="example-email" id="example-email">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-md-12">Password</label>
-                    <div class="col-md-12">
-                      <input type="password" value="password" class="form-control form-control-line">
+                      <input type="email" placeholder="Email" class="form-control form-control-line"
+                        name="email_address">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-12">Phone No</label>
                     <div class="col-md-12">
-                      <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
+                      <input type="text" placeholder="Phone No" class="form-control form-control-line"
+                        name="phone_number">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-md-12">Message</label>
+                    <label class="col-md-12">Bio</label>
                     <div class="col-md-12">
-                      <textarea rows="5" class="form-control form-control-line"></textarea>
+                      <textarea rows="5" class="form-control form-control-line" name="bio"></textarea>
                     </div>
                   </div>
                   <div class="form-group">
