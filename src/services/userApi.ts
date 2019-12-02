@@ -68,6 +68,51 @@ export class UserApiService {
     })
   }
 
+  updateUser(_id: String, data: any): Promise<any> {
+    var updateData = '{';  //{###}
+    var row = '';
+    for (var key in data) {
+      if (data.hasOwnProperty(key) && data[key]) {
+        row = key + ': "' + data[key] + '" ';
+        updateData += row;
+      }
+    }
+    updateData += '}';
+    var mutation = 'mutation {updateUser(data: ' + updateData + ' id: "' + _id + '" ) {_id}}';
+
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: mutation }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].updateUser
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
+  retrieveUserUpdates(_id: String, page: Number, limit: Number): Promise<any> {
+    var query = 'query {retrieveUserUpdates(id: "' + _id + '",page: ' + page + ', limit: ' + limit + ') {_id media{media_type media_url height width thumbnail_url}update_content status likes dislikes comments shares created_at updated_at}}';
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].retrieveUserUpdates,
+              meta: json['meta']
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
 
 }
 

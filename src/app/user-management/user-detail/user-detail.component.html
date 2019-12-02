@@ -16,13 +16,13 @@
           <h6 class="card-subtitle">{{userInfo.display_name}}</h6>
           <div class="row text-center justify-content-md-center">
             <div class="col-4">
-              <a href="javascript:void(0)" class="link" title="followers"><i class="icon-users"></i>
-                <span class="font-medium"> {{userInfo.followers}}</span>
+              <a href="javascript:void(0)" class="link" title="followers">
+                <span class="font-medium">Followers {{userInfo.followers}}</span>
               </a>
             </div>
             <div class="col-4">
-              <a href="javascript:void(0)" class="link" title="followings"><i class="icon-like"></i>
-                <span class="font-medium"> {{userInfo.followings}}</span>
+              <a href="javascript:void(0)" class="link" title="followings">
+                <span class="font-medium">Followings {{userInfo.followings}}</span>
               </a>
             </div>
           </div>
@@ -53,83 +53,45 @@
           <ngb-tabset>
             <ngb-tab title="Timeline">
               <ng-template ngbTabContent>
-                <div class="sl-item">
-                  <div class="sl-left"> <img src="/assets/img/portrait/medium/avatar-m-10.png" alt="user" width="50"
-                      class="rounded-circle" />
+                <div class="sl-item" *ngFor="let post of userPosts">
+                  <div class="sl-left">
+                    <img *ngIf="!avatar" src="/assets/img/portrait/medium/avatar-blank.png" class="rounded-circle"
+                      width="50">
+                    <img *ngIf="avatar" src="{{avatar}}" class="rounded-circle" width="50">
                   </div>
                   <div class="sl-right">
-                    <div><a href="javascript:void(0)" class="link">John Doe</a> <span class="sl-date">5 minutes
-                        ago</span>
-                      <p>assign a new task <a href="javascript:void(0)"> Design weblayout</a></p>
-                      <div class="row">
-                        <div class="col-lg-3 col-md-6 mb-3"><img src="/assets/img/photos/01.jpg"
-                            class="img-fluid rounded" /></div>
-                        <div class="col-lg-3 col-md-6 mb-3"><img src="/assets/img/photos/02.jpg"
-                            class="img-fluid rounded" /></div>
-                        <div class="col-lg-3 col-md-6 mb-3"><img src="/assets/img/photos/03.jpg"
-                            class="img-fluid rounded" /></div>
-                        <div class="col-lg-3 col-md-6 mb-3"><img src="/assets/img/photos/04.jpg"
-                            class="img-fluid rounded" /></div>
-                      </div>
-                      <div class="desc"> <a href="javascript:void(0)" class="link mr-2">2 comment</a> <a
-                          href="javascript:void(0)" class="link mr-2"><i class="fa fa-heart text-danger"></i> 5 Love</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                <div class="sl-item">
-                  <div class="sl-left"> <img src="/assets/img/portrait/medium/avatar-m-11.png" alt="user" width="50"
-                      class="rounded-circle" />
-                  </div>
-                  <div class="sl-right">
-                    <div> <a href="javascript:void(0)" class="link">John Doe</a> <span class="sl-date">5 minutes
-                        ago</span>
-                      <div class="mt-3 row">
-                        <div class="col-md-3 col-xs-12"><img src="/assets/img/photos/05.jpg" alt="user"
-                            class="img-fluid rounded" /></div>
-                        <div class="col-md-9 col-xs-12">
-                          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent
-                            libero. Sed cursus ante dapibus diam.
+                    <div>
+                      <h6 class="link">{{userInfo.first_name}} {{userInfo.middle_name}}
+                        {{userInfo.last_name}}</h6>
+                      <span class="sl-date">{{post.created_at | date: 'dd/MM/yyyy'}}</span>
+                      <div class="row" style="margin-top: 20px;">
+                        <div *ngIf="post.media.length > 0" class="row">
+                          <div *ngFor="let media of post.media" class="col-md-6 col-xs-12">
+                            <img src="{{media.media_url}}" alt="userpost" class="img-fluid rounded"
+                              width="{{media.width}}" height="{{media.height}}" />
+                          </div>
+                        </div>
+                        <div *ngIf="post.update_content" class="col-md-12 col-xs-12">
+                          <p> {{post.update_content}}</p>
                         </div>
                       </div>
-                      <div class="desc mt-3"> <a href="javascript:void(0)" class="link mr-2">2 comment</a> <a
-                          href="javascript:void(0)" class="link mr-2"><i class="fa fa-heart text-danger"></i> 5 Love</a>
+                      <div class="reaction">
+                        <a href="javascript:void(0)" class="link col-md-1"><i class="fa ft-thumbs-up"></i>
+                          {{post.likes}}</a>
+                        <a href="javascript:void(0)" class="link col-md-1"><i class="fa ft-thumbs-down"></i>
+                          {{post.dislikes}}</a>
+                        <a href="javascript:void(0)" class="link col-md-1"><i class="fa ft-link"></i>
+                          {{post.shares}}</a>
+                        <a href="javascript:void(0)" class="link col-md-1"><i class="fa ft-message-square"></i>
+                          {{post.comments}}</a>
                       </div>
                     </div>
                   </div>
+                  <hr>
                 </div>
-                <hr>
-                <div class="sl-item">
-                  <div class="sl-left"> <img src="/assets/img/portrait/medium/avatar-m-12.png" alt="user" width="50"
-                      class="rounded-circle" />
-                  </div>
-                  <div class="sl-right">
-                    <div><a href="javascript:void(0)" class="link">John Doe</a> <span class="sl-date">5 minutes
-                        ago</span>
-                      <p class="mt-2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-                        Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum
-                        imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper </p>
-                    </div>
-                    <div class="desc mt-3"> <a href="javascript:void(0)" class="link mr-2">2 comment</a> <a
-                        href="javascript:void(0)" class="link mr-2"><i class="fa fa-heart text-danger"></i> 5 Love</a>
-                    </div>
-                  </div>
-                </div>
-                <hr>
-                <div class="sl-item">
-                  <div class="sl-left"> <img src="/assets/img/portrait/medium/avatar-m-13.png" alt="user" width="50"
-                      class="rounded-circle" />
-                  </div>
-                  <div class="sl-right">
-                    <div><a href="javascript:void(0)" class="link">John Doe</a> <span class="sl-date">5 minutes
-                        ago</span>
-                      <blockquote class="mt-2">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
+                <button *ngIf="totalPostPage>currentPostPage" type="button" (click)="onReadMorePost()"
+                  class="btn-primary btn-lg btn-block btn-raised" style="width:60%; margin-left: 20%;">Read
+                  More</button>
               </ng-template>
             </ngb-tab>
             <ngb-tab title="Profile">
@@ -139,7 +101,7 @@
                     <br>
                     <p class="text-muted">{{userInfo.first_name}} {{userInfo.middle_name}} {{userInfo.last_name}}</p>
                   </div>
-                  <div class="col-md-3 col-xs-6 b-r"> <strong>Mobile</strong>
+                  <div class="col-md-3 col-xs-6 b-r"> <strong>Phone Number</strong>
                     <br>
                     <p class="text-muted">{{userInfo.phone_number}}</p>
                   </div>
@@ -156,57 +118,45 @@
             </ngb-tab>
             <ngb-tab title="Setting">
               <ng-template ngbTabContent>
-                <form class="form-horizontal form-material" #f="ngForm">
+                <form class="form" [formGroup]="userForm" (ngSubmit)="onUpdateProfile(userForm)">
                   <div class="form-group">
                     <label class="col-md-12">First Name</label>
                     <div class="col-md-12">
                       <input type="text" placeholder="First Name" class="form-control form-control-line"
-                        name="first_name">
+                        formControlName="first_name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-12">Last Name</label>
                     <div class="col-md-12">
                       <input type="text" placeholder="Last Name" class="form-control form-control-line"
-                        name="last_name">
+                        formControlName="last_name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="example-email" class="col-md-12">Email</label>
                     <div class="col-md-12">
                       <input type="email" placeholder="Email" class="form-control form-control-line"
-                        name="email_address">
+                        formControlName="email_address">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-md-12">Phone No</label>
                     <div class="col-md-12">
                       <input type="text" placeholder="Phone No" class="form-control form-control-line"
-                        name="phone_number">
+                        formControlName="phone_number">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-md-12">Bio</label>
+                    <label class="col-md-12">Country</label>
                     <div class="col-md-12">
-                      <textarea rows="5" class="form-control form-control-line" name="bio"></textarea>
+                      <input type="text" placeholder="Country" class="form-control form-control-line"
+                        formControlName="country">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="col-sm-12">Select Country</label>
+                  <div class="form-field">
                     <div class="col-sm-12">
-                      <select class="form-control form-control-line">
-                        <option>London</option>
-                        <option>India</option>
-                        <option>Usa</option>
-                        <option>Canada</option>
-                        <option>Thailand</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-12">
-                      <button type="submit" class="btn btn-raised btn-success" (click)="onUpdateProfile()">Update
-                        Profile</button>
+                      <button type="submit" class="btn btn-raised btn-success">Update Profile</button>
                     </div>
                   </div>
                 </form>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { ListUsersComponent } from './users/list-users.component';
 import { ListAdminsComponent } from './admins/list-admins.component';
@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         UserManagementRoutingModule,
         NgxDatatableModule,
         NgbModule

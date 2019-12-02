@@ -1,8 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { ApiService } from 'app/shared/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { AuthService } from 'app/shared/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
