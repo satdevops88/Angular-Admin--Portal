@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from 'app/shared/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UserApiService } from 'services/userApi';
 
 @Component({
   selector: 'app-list-admins',
@@ -10,27 +11,20 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListAdminsComponent {
 
-  rows = [
-    { name: 'Michael', username: 'michael', role: 'Admin', joined: '1 January 2019', actions: '' },
-    { name: 'Shamnex', username: 'shamnex', role: 'Moderator', joined: '4 April 2019', actions: '' },
-    { name: 'Sonxai', username: 'sonxai', role: 'Admin User', joined: '11 November 2019', actions: '' },
-  ];
-  temp = [];
-  columns = [
-    { name: 'ID' },
-    { name: 'Name' },
-    { name: 'Username' },
-    { name: 'Role' },
-    { name: 'Joined' },
-    { name: 'Actions' }
-  ];
+  rows = [];
+  page = {
+    totalElements: 0,
+    pageNumber: 0,
+    size: 10
+  }
+  filterVal = "";
 
-  constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
+  constructor(private toastr: ToastrService, private router: Router, private userApi: UserApiService) {
 
   }
 
   ngOnInit() {
-    this.temp = [...this.rows];
+    this.setPage({ offset: 0 })
   }
 
   onAddAdmin() {
@@ -39,6 +33,7 @@ export class ListAdminsComponent {
   }
 
   onUpdate(rowIndex) {
+    console.log('rowIndex', rowIndex);
     this.router.navigate(['user-management/update-admin/' + rowIndex])
   }
 
@@ -50,10 +45,32 @@ export class ListAdminsComponent {
 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
-    const temp = this.temp.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-    this.rows = temp;
+    this.filterVal = val;
+    this.setPage({ offset: 0 })
   }
+
+  setPage(pageInfo) {
+    this.page.pageNumber = pageInfo.offset;
+    if (this.filterVal == "") {
+      this.userApi.getAllAdminUsers(this.page.pageNumber + 1, 10).then(result => {
+        this.rows = result.data;
+        this.page.totalElements = result.meta.totalDocument;
+      }).catch(error => {
+        console.log('error', error);
+        this.rows = [];
+        this.page.totalElements = 0;
+      })
+    } else {
+      this.userApi.filterAdminUser(this.filterVal, this.page.pageNumber + 1, 10).then(result => {
+        this.rows = result.data;
+        this.page.totalElements = result.meta.totalDocument;
+      }).catch(error => {
+        console.log('error', error);
+        this.rows = [];
+        this.page.totalElements = 0;
+      })
+    }
+  }
+
 
 }

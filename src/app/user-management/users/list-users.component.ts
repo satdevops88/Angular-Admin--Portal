@@ -24,14 +24,6 @@ export class ListUsersComponent {
     this.setPage({ offset: 0 })
   }
 
-  onEdit(rowIndex) {
-    console.log('onEdit', rowIndex);
-  }
-
-  onDelete(rowIndex) {
-    console.log('onDelete', rowIndex);
-  }
-
   onBlock(rowIndex) {
     this.rows[rowIndex].activated = false;
   }

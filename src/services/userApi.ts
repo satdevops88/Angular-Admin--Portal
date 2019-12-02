@@ -13,7 +13,7 @@ export class UserApiService {
   constructor(private http: HttpClient) {
 
   }
-
+  //Users
   getAllUsers(page, limit): Promise<any> {
     var query = 'query {getAllUsers(page: ' + page + ', limit: ' + limit + ') {_id first_name last_name display_name email_address created_at status}}';
     return new Promise((resolve, reject) => {
@@ -113,6 +113,42 @@ export class UserApiService {
     })
   }
 
+  //Admin Users
+  getAllAdminUsers(page, limit): Promise<any> {
+    var query = 'query {getAllAdminUsers(page: ' + page + ', limit: ' + limit + ') {_id first_name middle_name last_name display_name email_address role_id{role_name role_slug role_permission} created_at status}}';
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].getAllAdminUsers,
+              meta: json['meta']
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
+  filterAdminUser(queryString: String, page: Number, limit: Number): Promise<any> {
+    var query = 'query {filterAdminUser(queryString: "' + queryString + '",page: ' + page + ', limit: ' + limit + ') {_id first_name middle_name last_name display_name email_address role_id{role_name role_slug role_permission} created_at status}}';
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].filterAdminUser,
+              meta: json['meta']
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
 
 }
 
