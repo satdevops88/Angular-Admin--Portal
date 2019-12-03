@@ -60,8 +60,8 @@ export class UserDetailComponent implements OnInit {
     }).catch(error => {
       console.log('error', error);
     })
-
   }
+
   onUpdateProfile() {
     this.userApi.updateUser(this.user_id, this.userForm.value).then(user => {
       this.retrieveUserData();

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
+import { MakeRequestService } from './makeRequest';
 
 const apiUri = environment.curl; // <-- add the URL of the GraphQL server here
 const accessToken = new HttpHeaders({
@@ -10,7 +11,7 @@ const accessToken = new HttpHeaders({
 @Injectable()
 export class UserApiService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private makeRequest: MakeRequestService) {
 
   }
   //Users
@@ -34,7 +35,7 @@ export class UserApiService {
 
   getUser(_id: String): Promise<any> {
     var query = 'query {getUser(id: "' + _id + '") {_id display_name first_name middle_name last_name gender ' +
-      'profile_image { media_url media_type thumbnail_url width height } ' + 'email_address phone_number country followers followings created_at}}';
+      'profile_image { media_url media_type thumbnail_url width height } role_id{ role_name role_slug role_permission} ' + 'email_address phone_number country followers followings created_at}}';
     return new Promise((resolve, reject) => {
       this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
         json => {
@@ -68,18 +69,36 @@ export class UserApiService {
     })
   }
 
-  updateUser(_id: String, data: any): Promise<any> {
-    var updateData = '{';  //{###}
-    var row = '';
-    for (var key in data) {
-      if (data.hasOwnProperty(key) && data[key]) {
-        row = key + ': "' + data[key] + '" ';
-        updateData += row;
-      }
-    }
-    updateData += '}';
-    var mutation = 'mutation {updateUser(data: ' + updateData + ' id: "' + _id + '" ) {_id}}';
+  // updateUser(_id: String, data: any): Promise<any> {
+  //   var updateData = '{';  //{###}
+  //   var row = '';
+  //   for (var key in data) {
+  //     if (data.hasOwnProperty(key) && data[key]) {
+  //       row = key + ': "' + data[key] + '" ';
+  //       updateData += row;
+  //     }
+  //   }
+  //   updateData += '}';
+  //   var mutation = 'mutation {updateUser(data: ' + updateData + ' id: "' + _id + '" ) {_id}}';
 
+  //   return new Promise((resolve, reject) => {
+  //     this.http.post(apiUri, { query: mutation }, { headers: accessToken }).subscribe(
+  //       json => {
+  //         if (json['status'] == "success") {
+  //           resolve({
+  //             data: json['data'].updateUser
+  //           });
+  //         }
+  //       },
+  //       error => {
+  //         reject(error);
+  //       })
+  //   })
+  // }
+
+  updateUser(responsePayload: any, params: any): Promise<any> {
+    var mutation = this.makeRequest.makeRequest('mutation', 'updateUser', responsePayload, params);
+    console.log('mutation', mutation);
     return new Promise((resolve, reject) => {
       this.http.post(apiUri, { query: mutation }, { headers: accessToken }).subscribe(
         json => {

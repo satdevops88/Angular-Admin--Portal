@@ -16,8 +16,10 @@
           <div class="col-2">
             <div class="align-self-center halfway-fab text-center">
               <a class="profile-image">
-                <img src="assets/img/portrait/avatars/avatar-08.png"
-                  class="rounded-circle img-border gradient-summer width-100" alt="Card image">
+                <img *ngIf="!avatar" src="/assets/img/portrait/medium/avatar-blank.png" class="rounded-circle"
+                  width="150">
+                <img *ngIf="avatar" src="{{avatar}}" class="rounded-circle img-border gradient-summer width-150"
+                  alt="Card image">
               </a>
             </div>
           </div>
@@ -39,30 +41,40 @@
             <div class="col-lg-8 col-md-12">
               <div class="card-body">
                 <div class="px-3">
-                  <form class="form" #f="ngForm">
+                  <form class="form" [formGroup]="adminForm">
                     <div class="form-body">
                       <h4 class="form-section"><i class="ft-user"></i> Admin Infomation</h4>
                       <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                           <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" class="form-control" name="name" [(ngModel)]="name" required>
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control" formControlName="first_name">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="middle_name">Middle Name</label>
+                            <input type="text" class="form-control" formControlName="middle_name">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control" formControlName="last_name">
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" class="form-control" name="username" [(ngModel)]="username"
-                              required>
+                            <label for="display_name">User Name</label>
+                            <input type="text" class="form-control" formControlName="display_name">
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="text" id="email" class="form-control" name="email" [(ngModel)]="email"
-                              required>
+                            <label for="email_address">E-mail</label>
+                            <input type="text" class="form-control" formControlName="email_address">
                           </div>
                         </div>
                       </div>
@@ -83,8 +95,9 @@
                     <div class="form-actions right">
                       <button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
                         <i class="ft-x"></i> Cancel </button>
-                      <button type="button" class="btn btn-raised btn-primary" (click)="onUpdate()"
-                        [disabled]="!f.valid"> <i class="fa fa-check-square-o"></i> Update </button>
+                      <button type="submit" class="btn btn-raised btn-primary" (click)="onUpdate()"> <i
+                          class="fa fa-check-square-o"></i>
+                        Update </button>
                     </div>
                   </form>
                 </div>

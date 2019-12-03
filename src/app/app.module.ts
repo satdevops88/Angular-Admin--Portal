@@ -28,6 +28,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { ReportManagementComponent } from './report-management/report-management.component';
 import { GraphQLModule } from './graphql.module';
 import { UserApiService } from 'services/userApi';
+import { RoleApiService } from 'services/roleApi';
+import { MakeRequestService } from 'services/makeRequest';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { UserApiService } from 'services/userApi';
         AuthService,
         AuthGuard,
         ApiService,
-        UserApiService
+        UserApiService,
+        RoleApiService,
+        MakeRequestService
     ],
     bootstrap: [AppComponent]
 })
