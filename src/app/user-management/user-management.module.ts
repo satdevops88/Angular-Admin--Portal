@@ -10,9 +10,6 @@ import { UpdateAdminComponent } from './update-admin/update-admin.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-
-
 @NgModule({
     imports: [
         CommonModule,

@@ -3,6 +3,7 @@ import { ApiService } from 'app/shared/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CATEGORIES } from '../forum-categories.config';
 import { ToastrService } from 'ngx-toastr';
+import { ForumCategoryApiService } from 'services/forumCategoryApi';
 
 @Component({
   selector: 'app-forum-categories',
@@ -13,31 +14,38 @@ export class ForumCategoriesComponent {
 
   rows = [];
   subrows = [];
-  temp = [];
-  columns = [
-    { name: 'ID' },
-    { name: 'Title' },
-    { name: 'Subcategories' },
-    { name: 'Actions' }
-  ];
-  subcolumns = [
-    { name: 'ID' },
-    { name: 'Title' },
-    { name: 'Threads' },
-    { name: 'Actions' }
-  ];
+  page = {
+    totalElements: 0,
+    pageNumber: 0,
+    size: 10
+  }
+  subpage = {
+    totalElements: 0,
+    pageNumber: 0,
+    size: 20
+  }
   selected = [];
-  constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
+  selectedCategory = "";
+  constructor(private forumCategoryApi: ForumCategoryApiService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
 
   }
 
   ngOnInit() {
-    this.rows = CATEGORIES.filter(categories => categories);
-    this.selected = [this.rows[0]]
-    this.subrows = this.rows[0].subcategories;
+    this.setPage({ offset: 0 })
   }
   onSelect({ selected }) {
-    this.subrows = selected[0].subcategories;
+    console.log('selected', selected);
+    console.log('this.selected', this.selected);
+
+    this.selectedCategory = this.selected[0].category;
+    var subResponsePayload = ['_id', 'subcategory', 'threads', 'subscribed', 'createdAt',
+      { key: 'forum_subcategory_media', fields: ['media_url', 'width', 'height', 'tags'] }];
+    var subParams = { id: this.selected[0]._id, page: 1, limit: 20 };
+    this.forumCategoryApi.getAllCategorySubCategory(subResponsePayload, subParams).then(subResult => {
+      console.log('subResult', subResult);
+      this.subrows = subResult.data;
+      this.subpage.totalElements = subResult.meta.totalDocument;
+    })
   }
 
   onViewThreads(rowIndex) {
@@ -72,4 +80,23 @@ export class ForumCategoriesComponent {
     this.router.navigate(['forum-management/create-categories/new']);
   }
 
+  setPage(pageInfo) {
+    this.page.pageNumber = pageInfo.offset;
+    var responsePayload = ['_id', 'category', 'slug',
+      { key: 'forum_category_media', fields: ['media_url', 'height', 'width', 'thumbnail_url'] },
+      'threads', 'createdAt'];
+    var params = { page: this.page.pageNumber + 1, limit: 10 }
+    this.forumCategoryApi.getAllForumCategories(responsePayload, params).then(result => {
+      console.log('result', result);
+      this.rows = result.data;
+      this.page.totalElements = result.meta.totalDocument;
+      this.selected = [this.rows[0]];
+      this.onSelect(result)
+
+    }).catch(error => {
+      console.log('error', error);
+      this.rows = [];
+      this.page.totalElements = 0;
+    })
+  }
 }

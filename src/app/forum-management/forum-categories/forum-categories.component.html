@@ -15,25 +15,28 @@
 			</div>
 			<div class="card-body">
 				<div class="card-block">
-					<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
-						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows" [selected]="selected"
-						[selectionType]="'single'" (select)="onSelect($event)">
+					<ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="60"
+						[footerHeight]="50" [rows]="rows" [selected]="selected" [selectionType]="'single'"
+						(select)="onSelect($event)" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+						[limit]="page.size" (page)="setPage($event)">
 						<ngx-datatable-column name="ID" [width]="50">
 							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-								{{rowIndex + 1}}
+								{{page.pageNumber * 10 + rowIndex + 1}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Media">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								<img src="{{row.forum_category_media.media_url}}" width="50">
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Title">
-							<ng-template let-column="column" ngx-datatable-header-template>
-								Categories Name
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.category}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Subcategories">
-							<ng-template let-column="column" ngx-datatable-header-template>
-								Sub Categories Count
-							</ng-template>
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-								{{rows[rowIndex].subcategories.length}}
+						<ngx-datatable-column name="Threads">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.threads}}
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Actions" [width]="300">
@@ -52,30 +55,28 @@
 	<div class="col-sm-6">
 		<div class="card">
 			<div class="card-header flex-space-between">
-				{{selected[0].title}} / Sub Categories Details
+				{{selectedCategory}} / Sub Categories Details
 				<button class="btn btn-raised btn-round btn-primary" (click)="onCreateSubCategories()">Create
 					SubCategories</button>
 			</div>
 			<div class="card-body">
 				<div class="card-block">
-					<ngx-datatable class="material" [columns]="subcolumns" [columnMode]="'force'" [headerHeight]="50"
-						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="subrows">
+					<ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="60"
+						[footerHeight]="50" [rows]="subrows" [externalPaging]="true" [count]="page.totalElements"
+						[offset]="page.pageNumber" [limit]="page.size">
 						<ngx-datatable-column name="ID" [width]="50">
 							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-								{{rowIndex + 1}}
+								{{subpage.pageNumber * 10 + rowIndex + 1}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Title">
-							<ng-template let-column="column" ngx-datatable-header-template>
-								SubCategories Name
+						<ngx-datatable-column name="SubCategoriesName">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.subcategory}}
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Threads">
-							<ng-template let-column="column" ngx-datatable-header-template>
-								Threads Count
-							</ng-template>
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-								0
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.threads}}
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Actions" [width]="300">

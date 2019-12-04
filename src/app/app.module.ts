@@ -30,6 +30,7 @@ import { GraphQLModule } from './graphql.module';
 import { UserApiService } from 'services/userApi';
 import { RoleApiService } from 'services/roleApi';
 import { MakeRequestService } from 'services/makeRequest';
+import { ForumCategoryApiService } from 'services/forumCategoryApi';
 
 
 @NgModule({
@@ -60,10 +61,11 @@ import { MakeRequestService } from 'services/makeRequest';
     providers: [
         AuthService,
         AuthGuard,
+        MakeRequestService,
         ApiService,
         UserApiService,
         RoleApiService,
-        MakeRequestService
+        ForumCategoryApiService
     ],
     bootstrap: [AppComponent]
 })
