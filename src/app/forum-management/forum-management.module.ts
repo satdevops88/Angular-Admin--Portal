@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForumManagementRoutingModule } from './forum-management-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ForumCategoriesComponent } from './forum-categories/forum-categories.component';
@@ -17,6 +17,7 @@ import { CreateCategoriesComponent } from './create-categories/create-categories
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         ForumManagementRoutingModule,
         NgxDatatableModule,
         NgbModule

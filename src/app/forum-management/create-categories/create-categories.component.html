@@ -11,21 +11,23 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="card-block">
-					<form class="form" #f="ngForm">
+					<form class="form" [formGroup]="categoryForm">
 						<div class="form-body">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="name">Name</label>
-										<input type="text" id="name" class="form-control" name="name" ngModel required>
+										<label for="category">Category Name</label>
+										<input type="text" class="form-control" formControlName="category">
 									</div>
 								</div>
-							</div>
-							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="details">Details</label>
-										<textarea rows="5" class="form-control" id="details" name="details" ngModel></textarea>
+										<label for="image">Category Image</label>
+										<div class="custom-file center-block d-block">
+											<input type="file" class="custom-file-input" name="image" accept="image/*"
+												(change)="onFileSelect($event)">
+											<label class="custom-file-label" for="image">{{imageLabel}}</label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -33,7 +35,7 @@
 						<div class="form-actions right">
 							<button type="button" class="btn btn-raised btn-warning mr-1" (click)="onCancel()">
 								<i class="ft-x"></i> Cancel </button>
-							<button type="button" class="btn btn-raised btn-primary" (click)="onCreate()" [disabled]="!f.valid"> <i
+							<button type="button" class="btn btn-raised btn-primary" (click)="onCreate()"> <i
 									class="fa fa-check-square-o"></i> Create </button>
 						</div>
 					</form>

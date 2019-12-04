@@ -16,7 +16,6 @@ export class ForumCategoryApiService {
 
   getAllForumCategories(responsePayload: any, params: any): Promise<any> {
     var query = this.makeRequest.makeRequest('query', 'retrieveAllForumCategory', responsePayload, params);
-    console.log(query);
     return new Promise((resolve, reject) => {
       this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
         json => {
@@ -35,7 +34,6 @@ export class ForumCategoryApiService {
 
   getAllCategorySubCategory(responsePayload: any, params: any): Promise<any> {
     var query = this.makeRequest.makeRequest('query', 'retrieveAllCategorySubCategory', responsePayload, params);
-    console.log(query);
     return new Promise((resolve, reject) => {
       this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
         json => {
@@ -51,5 +49,26 @@ export class ForumCategoryApiService {
         })
     })
   }
+
+  createForumCategory(responsePayload: any, params: any, fileToUpload: File): Promise<any> {
+    var mutation = this.makeRequest.makeRequest('mutation', 'createForumCategory', responsePayload, params);
+    const formData = new FormData();
+    formData.append('query', mutation);
+    formData.append('media', fileToUpload);
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, formData, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].createForumCategory
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
 }
 
