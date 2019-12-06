@@ -36,7 +36,6 @@ export class ForumCategoriesComponent {
   onSelect({ selected }) {
     console.log('selected', selected);
     console.log('this.selected', this.selected);
-
     this.selectedCategory = this.selected[0].category;
     var subResponsePayload = ['_id', 'subcategory', 'threads', 'subscribed', 'createdAt',
       { key: 'forum_subcategory_media', fields: ['media_url', 'width', 'height', 'tags'] }];
@@ -66,12 +65,12 @@ export class ForumCategoriesComponent {
     this.router.navigate(['forum-management/create-categories/' + this.selected[0].name]);
   }
 
-  onUpdate(rowIndex) {
-    this.router.navigate(['forum-management/update-categories/' + this.rows[rowIndex].name + '/all']);
+  onUpdate(row) {
+    this.router.navigate(['forum-management/update-categories/' + row._id + '/all']);
   }
 
-  onDelete(rowIndex) {
-    if (confirm('Are you sure to delete "' + this.rows[rowIndex].title + '" Category ?')) {
+  onDelete(row) {
+    if (confirm('Are you sure to delete "' + row.category + '" Category ?')) {
       this.toastr.success('Deleted Category Successfully', 'Success');
     }
   }
@@ -87,7 +86,6 @@ export class ForumCategoriesComponent {
       'threads', 'createdAt'];
     var params = { page: this.page.pageNumber + 1, limit: 10 }
     this.forumCategoryApi.getAllForumCategories(responsePayload, params).then(result => {
-      console.log('result', result);
       this.rows = result.data;
       this.page.totalElements = result.meta.totalDocument;
       this.selected = [this.rows[0]];

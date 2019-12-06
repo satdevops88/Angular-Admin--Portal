@@ -33,14 +33,12 @@ export class CreateCategoriesComponent {
     if (event.target.files.length > 0) {
       this.fileToUpload = event.target.files[0];
       this.imageLabel = this.fileToUpload.name;
-      console.log('file', this.fileToUpload);
     }
   }
   onCancel() {
     this.router.navigate(['forum-management/categories']);
   }
   onCreate() {
-    console.log('this.categoryForm', this.categoryForm.value);
     if (this.categoryForm.value['category'] == "") {
       this.toastr.warning('Please input Category Name', 'Warning');
     } else {

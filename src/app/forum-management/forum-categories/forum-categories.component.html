@@ -40,11 +40,11 @@
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Actions" [width]="300">
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+							<ng-template let-row="row" ngx-datatable-cell-template>
 								<button type="button" class="btn btn-outline-primary btn-round" style="margin-left: 10px;"
-									(click)="onUpdate(rowIndex)">Update</button>
+									(click)="onUpdate(row)">Update</button>
 								<button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
-									(click)="onDelete(rowIndex)">Delete</button>
+									(click)="onDelete(row)">Delete</button>
 							</ng-template>
 						</ngx-datatable-column>
 					</ngx-datatable>
