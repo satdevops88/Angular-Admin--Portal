@@ -51,18 +51,18 @@ export class ForumCategoriesComponent {
     this.router.navigate(['forum-management/threads'])
   }
 
-  onSubUpdate(rowIndex) {
-    this.router.navigate(['forum-management/update-categories/' + this.selected[0].name + '/' + this.subrows[rowIndex].name]);
+  onSubUpdate(row) {
+    this.router.navigate(['forum-management/update-categories/' + this.selected[0]._id + '/' + row._id]);
   }
 
-  onSubDelete(rowIndex) {
-    if (confirm('Are you sure to delete "' + this.subrows[rowIndex].title + '" SubCategory ?')) {
+  onSubDelete(row) {
+    if (confirm('Are you sure to delete "' + row.subcategory + '" SubCategory ?')) {
       this.toastr.success('Deleted SubCategory Successfully', 'Success');
     }
   }
 
   onCreateSubCategories() {
-    this.router.navigate(['forum-management/create-categories/' + this.selected[0].name]);
+    this.router.navigate(['forum-management/create-categories/' + this.selected[0]._id]);
   }
 
   onUpdate(row) {

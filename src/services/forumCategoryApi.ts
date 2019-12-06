@@ -14,6 +14,7 @@ export class ForumCategoryApiService {
   constructor(private http: HttpClient, private makeRequest: MakeRequestService) {
   }
 
+  //Category
   getAllForumCategories(responsePayload: any, params: any): Promise<any> {
     var query = this.makeRequest.makeRequest('query', 'retrieveAllForumCategory', responsePayload, params);
     return new Promise((resolve, reject) => {
@@ -49,24 +50,6 @@ export class ForumCategoryApiService {
     })
   }
 
-  getAllCategorySubCategory(responsePayload: any, params: any): Promise<any> {
-    var query = this.makeRequest.makeRequest('query', 'retrieveAllCategorySubCategory', responsePayload, params);
-    return new Promise((resolve, reject) => {
-      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
-        json => {
-          if (json['status'] == "success") {
-            resolve({
-              data: json['data'].retrieveAllCategorySubCategory,
-              meta: json['meta']
-            });
-          }
-        },
-        error => {
-          reject(error);
-        })
-    })
-  }
-
   createForumCategory(responsePayload: any, params: any, fileToUpload: File): Promise<any> {
     var mutation = this.makeRequest.makeRequest('mutation', 'createForumCategory', responsePayload, params);
     const formData = new FormData();
@@ -89,11 +72,9 @@ export class ForumCategoryApiService {
 
   updateForumCategory(responsePayload: any, params: any, fileToUpload: File): Promise<any> {
     var mutation = this.makeRequest.makeRequest('mutation', 'updateForumCategory', responsePayload, params);
-    console.log('mutation', mutation);
     const formData = new FormData();
     formData.append('query', mutation);
     if (fileToUpload) {
-      console.log('oh, yes for fileToUpload');
       formData.append('media', fileToUpload);
     }
     return new Promise((resolve, reject) => {
@@ -110,6 +91,107 @@ export class ForumCategoryApiService {
         })
     })
   }
+
+  //SubCategory
+  getAllCategorySubCategory(responsePayload: any, params: any): Promise<any> {
+    var query = this.makeRequest.makeRequest('query', 'retrieveAllCategorySubCategory', responsePayload, params);
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].retrieveAllCategorySubCategory,
+              meta: json['meta']
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
+  getOneForumSubCategories(responsePayload: any, params: any): Promise<any> {
+    var query = this.makeRequest.makeRequest('query', 'retrieveForumSubCategory', responsePayload, params);
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].retrieveForumSubCategory
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
+  createForumSubCategory(responsePayload: any, params: any, fileToUpload: File): Promise<any> {
+    var mutation = this.makeRequest.makeRequest('mutation', 'createForumSubCategory', responsePayload, params);
+    const formData = new FormData();
+    formData.append('query', mutation);
+    formData.append('media', fileToUpload);
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, formData, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].createForumSubCategory
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
+  updateForumSubCategory(responsePayload: any, params: any): Promise<any> {
+    var mutation = this.makeRequest.makeRequest('mutation', 'updateForumSubCategory', responsePayload, params);
+    console.log('mutation', mutation);
+    const formData = new FormData();
+    formData.append('query', mutation);
+    // if (fileToUpload) {
+    //   formData.append('media', fileToUpload);
+    // }
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, formData, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].updateForumSubCategory
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
+  //Threads
+  getAllThread(responsePayload: any, params: any): Promise<any> {
+    var query = this.makeRequest.makeRequest('query', 'retrieveAllThread', responsePayload, params);
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].retrieveAllThread,
+              meta: json['meta']
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
+
+
 
 }
 

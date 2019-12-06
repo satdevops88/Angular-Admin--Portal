@@ -13,6 +13,7 @@ import { ForumCategoryApiService } from 'services/forumCategoryApi';
 })
 export class UpdateCategoriesComponent {
   categoryID: String;
+  subCategoryID: String;
   categoryForm: FormGroup;
   categories: boolean;
   imageLabel: String = "Choose File";
@@ -40,8 +41,15 @@ export class UpdateCategoriesComponent {
       })
     } else {
       this.categories = false;
-      this.categoryForm = this.formBuilder.group({
-        category: ['', Validators.required]
+      this.subCategoryID = this.route.params['value'].subcategory;
+      var responseSubPayload = ['_id', { key: 'categoryId', fields: ['category', { key: 'forum_category_media', fields: ['media_url', 'width', 'height'] }, 'threads'] },
+        { key: 'forum_subcategory_media', fields: ['media_url', 'height', 'width', 'tags'] },
+        'subcategory', 'threads', 'subscribed', 'createdAt'];
+      var params = { id: this.subCategoryID }
+      this.forumCategoryApi.getOneForumSubCategories(responseSubPayload, params).then(result => {
+        this.categoryForm = this.formBuilder.group({
+          category: [result.data.subcategory]
+        })
       })
 
     }
@@ -58,20 +66,35 @@ export class UpdateCategoriesComponent {
     this.router.navigate(['forum-management/categories']);
   }
   onUpdate() {
-
     if (this.categoryForm.value['category'] == "") {
       this.toastr.warning('Please input Category Name', 'Warning');
     } else {
-      var responsePayload = ['_id', 'category', 'slug', 'createdAt',
-        { key: 'forum_category_media', fields: ['media_url', 'height', 'width'] }];
-      var params = { data: this.categoryForm.value, id: this.categoryID }
-      this.forumCategoryApi.updateForumCategory(responsePayload, params, this.fileToUpload).then(result => {
-        this.mediaInfo = result.data.forum_category_media;
-        this.toastr.success('Created Successfully', 'Success');
-        this.router.navigate(['forum-management/categories']);
-      }).catch(error => {
-        console.log('error', error);
-      })
+      if (this.categories) {
+        var responsePayload = ['_id', 'category', 'slug', 'createdAt',
+          { key: 'forum_category_media', fields: ['media_url', 'height', 'width'] }];
+        var params = { data: this.categoryForm.value, id: this.categoryID }
+        this.forumCategoryApi.updateForumCategory(responsePayload, params, this.fileToUpload).then(result => {
+          this.mediaInfo = result.data.forum_category_media;
+          this.toastr.success('Updated Successfully', 'Success');
+          this.router.navigate(['forum-management/categories']);
+        }).catch(error => {
+          console.log('error', error);
+        })
+      } else {
+        var responsePayload = ['_id', { key: 'categoryId', fields: ['category'] }, 'subcategory',
+          { key: 'forum_subcategory_media', fields: ['media_url', 'height', 'width'] }];
+        var data: any = {
+          subcategory: this.categoryForm.value['category']
+        }
+        var params = { data: data, id: this.subCategoryID }
+        this.forumCategoryApi.updateForumSubCategory(responsePayload, params).then(result => {
+          // this.mediaInfo = result.data.forum_category_media;
+          this.toastr.success('Updated Successfully', 'Success');
+          this.router.navigate(['forum-management/categories']);
+        }).catch(error => {
+          console.log('error', error);
+        })
+      }
     }
   }
 }
