@@ -9,9 +9,9 @@
 	<div class="row">
 		<div class="col-sm-1"> </div>
 		<div class="col-sm-10">
-			<div class="card">
+			<div *ngIf="threadInfo" class="card">
 				<div class="card-header">
-					<p class="mb-0">Technology / Technology Market / What is the technology market?</p>
+					<p class="mb-0">{{threadInfo.categoryId.category}} / {{threadInfo.subcategoryId.subcategory}}</p>
 				</div>
 				<div class="card-body">
 					<div class="card-block">
@@ -21,29 +21,33 @@
 									<div class="px-3">
 										<form class="form" #f="ngForm">
 											<div class="form-body">
-												<h4 class="form-section"><i class="ft-file-text"></i> Thread Content</h4>
+												<h4 class="form-section"><i class="ft-file-text"></i> {{threadInfo.title}}</h4>
 												<div class="row">
 													<div class="col-md-2" style="text-align: center;">
 														<a href="javascript:;">
-															<img _ngcontent-c7="" alt="user" class="rounded-circle"
-																src="/assets/img/portrait/medium/avatar-m-10.png" width="80">
+															<img alt="user" class="rounded-circle"
+																src="{{threadInfo.createdBy.profile_image.media_url}}" width="80">
 														</a>
-														<h6 class="mt10"> <a href="javascript:;">Defiant America</a> </h6>
-														<div class="mb5"> <i class="fa fa-user"></i> Member</div>
-														<div> <small>Joined: <span class="js_moment" data-time="2019-08-06 10:28:29"
-																	title="Tuesday, August 6, 2019 6:28 pm">3 months ago</span></small> </div>
+														<h6 class="mt10"> <a href="javascript:;">{{threadInfo.createdBy.display_name}}</a> </h6>
+														<div class="mb5">
+															<i class="fa ft-heart" title="Like"></i> {{threadInfo.likes}}
+															<i class="fa ft-eye" title="View" style="margin-left: 10px;"></i> {{threadInfo.views}}
+														</div>
+														<div>
+															<small>Created: <span class="js_moment"
+																	title="{{threadInfo.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}">{{threadInfo.createdAt | date: 'yyyy-MM-dd'}}</span>
+															</small>
+														</div>
 													</div>
 													<div class="col-md-10">
 														<div class="form-group">
-															<p class="mb-0">Liberals will always be crying babies because they can't accept reality.
-																They are stuck in a fantasy world where they believe everything is about feelings and
-																disregard the laws of physics.
-																They are a sorry lot!
-															</p>
-															<p>
-																<img src="https://i.imgur.com/pTDqyoU.jpg"
-																	alt="Liberal will always be crying babies becasue they can't accept reality."
-																	width="480" height="638" />
+															<div class="row">
+																<div *ngFor="let media of threadInfo.thread_media" class="col-md-3">
+																	<img src="{{media.media_url}}" alt="" width="100%" />
+																</div>
+															</div>
+															<p class="mb-0">
+																{{threadInfo.content}}
 															</p>
 														</div>
 													</div>
@@ -62,57 +66,44 @@
 					</div>
 				</div>
 			</div>
-			<div class="card">
+			<div *ngFor="let post of threadPosts" class="card">
 				<div class="card-body">
-					<div class="card-block">
+					<div class="card-block" style="padding-top: 20px;">
 						<div class="px-3">
 							<form class="form" #f="ngForm">
 								<div class="form-body">
-									<h4 class="form-section"><i class="ft-file-text"></i> Reply Content</h4>
 									<div class="row">
 										<div class="col-md-2" style="text-align: center;">
 											<a href="javascript:;">
 												<img _ngcontent-c7="" alt="user" class="rounded-circle"
-													src="/assets/img/portrait/medium/avatar-m-7.png" width="80">
+													src="{{post.createdBy.profile_image.media_url}}" width="80">
 											</a>
-											<h6 class="mt10"> <a href="javascript:;">Cliff Clarke</a> </h6>
-											<div class="mb5"> <i class="fa fa-user"></i> Member</div>
-											<div> <small>Joined: <span class="js_moment" data-time="2019-08-07 22:36:45"
-														title="Tuesday, August 6, 2019 6:28 pm">3 months ago</span></small> </div>
-										</div>
-										<div class="col-md-10">
-											<div class="form-group">
-												<p class="mb-0">You are absolutely right.🤣🤣</p>
+											<h6 class="mt10"> <a href="javascript:;">{{post.createdBy.display_name}}</a> </h6>
+											<div>
+												<small>Created: <span class="js_moment"
+														title="{{post.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}">{{post.createdAt | date: 'yyyy-MM-dd'}}</span>
+												</small>
+											</div>
+											<div class="mb5">
+												<i class="fa ft-heart" title="Like"></i>
+												<span>{{post.likes}}</span>
+												<span *ngIf="post.status=='active'" class="badge badge-pill badge-success"
+													style="cursor: pointer; margin-left: 15px;"
+													(click)="onUpdatePostStatus('active')">Online</span>
+												<span *ngIf="post.status!='active'" class="badge badge-pill badge-danger"
+													style="cursor: pointer; margin-left: 15px;"
+													(click)="onUpdatePostStatus('inactive')">Offline</span>
+											</div>
+											<div class="mb5">
+												<i class="fa ft-message-square" title="Comment"></i> {{post.comments}}
+												<span class="badge badge-pill badge-secondary" style="cursor: pointer;"
+													(click)="onViewComment(post._id)">View
+													Comment</span>
 											</div>
 										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-body">
-					<div class="card-block">
-						<div class="px-3">
-							<form class="form" #f="ngForm">
-								<div class="form-body">
-									<h4 class="form-section"><i class="ft-file-text"></i> Reply Content</h4>
-									<div class="row">
-										<div class="col-md-2" style="text-align: center;">
-											<a href="javascript:;">
-												<img _ngcontent-c7="" alt="user" class="rounded-circle"
-													src="/assets/img/portrait/medium/avatar-m-5.png" width="80">
-											</a>
-											<h6 class="mt10"> <a href="javascript:;">Siboy Siboy</a> </h6>
-											<div class="mb5"> <i class="fa fa-user"></i> Member</div>
-											<div> <small>Joined: <span class="js_moment" data-time="2019-08-07 22:36:45"
-														title="Tuesday, August 6, 2019 6:28 pm">3 months ago</span></small> </div>
-										</div>
 										<div class="col-md-10">
 											<div class="form-group">
-												<p class="mb-0">shit...</p>
+												<p class="mb-0">{{post.content}}</p>
 											</div>
 										</div>
 									</div>

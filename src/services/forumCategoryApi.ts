@@ -208,8 +208,40 @@ export class ForumCategoryApiService {
     })
   }
 
+  getOneThread(responsePayload: any, params: any): Promise<any> {
+    var query = this.makeRequest.makeRequest('query', 'retrieveThread', responsePayload, params);
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].retrieveThread
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
 
-
+  getAllThreadPost(responsePayload: any, params: any): Promise<any> {
+    var query = this.makeRequest.makeRequest('query', 'retrieveAllThreadPost', responsePayload, params);
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].retrieveAllThreadPost,
+              meta: json['meta']
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
 
 }
 
