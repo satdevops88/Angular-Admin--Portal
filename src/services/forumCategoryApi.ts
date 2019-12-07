@@ -190,6 +190,24 @@ export class ForumCategoryApiService {
     })
   }
 
+  filterThread(responsePayload: any, params: any): Promise<any> {
+    var query = this.makeRequest.makeRequest('query', 'filterThread', responsePayload, params);
+    return new Promise((resolve, reject) => {
+      this.http.post(apiUri, { query: query }, { headers: accessToken }).subscribe(
+        json => {
+          if (json['status'] == "success") {
+            resolve({
+              data: json['data'].filterThread,
+              meta: json['meta']
+            });
+          }
+        },
+        error => {
+          reject(error);
+        })
+    })
+  }
+
 
 
 

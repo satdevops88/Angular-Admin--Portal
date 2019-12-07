@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from 'app/shared/api/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ForumCategoryApiService } from 'services/forumCategoryApi';
 
 @Component({
   selector: 'app-forum-threads',
@@ -10,30 +11,21 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ForumThreadsComponent {
 
-  rows = [
-    { categories: "Technology", subcategories: "Technology Market", title: "what is the technology market?", content: "Technology market is the market of Technology", date: "3 months ago" },
-    { categories: "Technology", subcategories: "Technology Market", title: "Testing", content: "This is the testing Thread", date: "yesterday" },
-    { categories: "Entertainment", subcategories: "Literature", title: "what is the Literature?", content: "Literature is the Literature", date: "2 months ago" },
-    { categories: "Entertainment", subcategories: "Gaming", title: "what is the Gaming?", content: "Gaming is the Gaming of Entertainment", date: "8 months ago" },
-  ];
-  temp = [];
-  columns = [
-    { name: 'ID' },
-    { name: 'Categories' },
-    { name: 'Subcategories' },
-    { name: 'Title' },
-    { name: 'Content' },
-    { name: 'Attachements' },
-    { name: 'Date' }
-  ];
+  rows = [];
+  page = {
+    totalElements: 0,
+    pageNumber: 0,
+    size: 10
+  }
+  filterVal = "";
   selected = [];
 
-  constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
+  constructor(private forumCategoryApi: ForumCategoryApiService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
 
   }
 
   ngOnInit() {
-    this.temp = [...this.rows];
+    this.setPage({ offset: 0 })
   }
   onCombineThreads() {
     if (this.selected.length < 2) {
@@ -50,10 +42,41 @@ export class ForumThreadsComponent {
 
   updateFilter(event) {
     const val = event.target.value.toLowerCase();
-    const temp = this.temp.filter(function (d) {
-      return (d.title + d.content).toLowerCase().indexOf(val) !== -1 || !val;
-    });
-    this.rows = temp;
+    this.filterVal = val;
   }
 
+  onFilter() {
+    this.setPage({ offset: 0 })
+  }
+
+  setPage(pageInfo) {
+    this.page.pageNumber = pageInfo.offset;
+    var responsePayload = ['_id', { key: 'categoryId', fields: ['_id', 'category', 'threads'] },
+      { key: 'subcategoryId', fields: ['_id', 'subcategory', 'threads'] },
+      { key: 'reference', fields: ['reference_type'] }, { key: 'thread_media', fields: ['tags', 'media_url', 'width', 'height'] },
+      'title', 'titleSlug', 'content', 'status', 'likes', 'liked', 'subscribed', 'posts', 'views', 'isDuplicate',
+      { key: 'createdBy', fields: [{ key: 'profile_image', fields: ['media_url'] }, 'display_name'] }, 'createdAt'];
+    if (this.filterVal == "") {
+      var params = { page: this.page.pageNumber + 1, limit: 10 }
+      this.forumCategoryApi.getAllThread(responsePayload, params).then(result => {
+        console.log('result', result);
+        this.rows = result.data;
+        this.page.totalElements = result.meta.totalDocument;
+      }).catch(error => {
+        console.log('error', error);
+        this.rows = [];
+        this.page.totalElements = 0;
+      })
+    } else {
+      var filterParams = { queryString: this.filterVal, status: "active", page: this.page.pageNumber + 1, limit: 10 }
+      this.forumCategoryApi.filterThread(responsePayload, filterParams).then(result => {
+        this.rows = result.data;
+        this.page.totalElements = result.meta.totalDocument;
+      }).catch(error => {
+        console.log('error', error);
+        this.rows = [];
+        this.page.totalElements = 0;
+      })
+    }
+  }
 }

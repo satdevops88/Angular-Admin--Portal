@@ -18,36 +18,54 @@
 						<button class="dropdown-item">Send push Notification</button>
 					</div>
 				</div>
-				<input type="text" style="padding:5px;margin:15px;width:30%;"
+				<input type="text" style="padding:5px;margin:15px 15px 15px 100px;width:30%;"
 					placeholder="Type to filter the Title or Content ..." (keyup)="updateFilter($event)" />
+				<button class="btn btn-raised btn-round btn-success" style="margin-top: 15px;" (click)="onFilter()">Search
+					Threads</button>
 			</div>
 			<div class="card-body">
 				<div class="card-block">
-					<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
-						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows" [selected]="selected"
-						[selectionType]="'checkbox'" (select)="onSelect($event)">
+					<ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="60"
+						[footerHeight]="50" [limit]="10" [rows]="rows" [selected]="selected" [selectionType]="'checkbox'"
+						(select)="onSelect($event)" [externalPaging]="true" [count]="page.totalElements" [offset]="page.pageNumber"
+						[limit]="page.size" (page)="setPage($event)">
 						<ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
 							[resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
 						</ngx-datatable-column>
 						<ngx-datatable-column name="ID" [width]="50">
 							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-								{{rowIndex + 1}}
+								{{page.pageNumber * 10 + rowIndex + 1}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Title">
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-								<a [routerLink]="['/forum-management/threads/1211-2323-2342']">{{value}}</a>
+						<ngx-datatable-column name="Title" [width]="400">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								<a [routerLink]="['/forum-management/threads/', row._id]">{{row.title}}</a>
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Categories">
-							<ng-template let-column="column" ngx-datatable-header-template>
-								Category
+						<ngx-datatable-column name="Category">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.categoryId.category}}
 							</ng-template>
-							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-								{{row.categories}} / {{row.subcategories}}
+						</ngx-datatable-column>
+						<ngx-datatable-column name="SubCategory">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.subcategoryId.subcategory}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Author">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.createdBy.display_name}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="Posts">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.posts}}
 							</ng-template>
 						</ngx-datatable-column>
 						<ngx-datatable-column name="Date">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.createdAt | date: 'dd/MM/yyyy'}}
+							</ng-template>
 						</ngx-datatable-column>
 					</ngx-datatable>
 				</div>
