@@ -97,13 +97,46 @@
 											<div class="mb5">
 												<i class="fa ft-message-square" title="Comment"></i> {{post.comments}}
 												<span class="badge badge-pill badge-secondary" style="cursor: pointer;"
-													(click)="onViewComment(post._id)">View
-													Comment</span>
+													(click)="onViewComment(post)">View Comment</span>
 											</div>
 										</div>
 										<div class="col-md-10">
 											<div class="form-group">
 												<p class="mb-0">{{post.content}}</p>
+											</div>
+										</div>
+									</div>
+									<!-- comment -->
+									<div *ngIf="post.viewComment" style="border-top: 1px solid #d3dce9;">
+										<div *ngFor="let comment of post.commentData" class="row" style="margin-top: 15px;">
+											<div class="col-md-1">
+											</div>
+											<div class="col-md-2" style="text-align: center;">
+												<a href="javascript:;">
+													<img _ngcontent-c7="" alt="user" class="rounded-circle"
+														src="{{comment.createdBy.profile_image.media_url}}" width="50">
+												</a>
+												<h6 class="mt10"> <a href="javascript:;">{{comment.createdBy.display_name}}</a> </h6>
+												<div>
+													<small>Created: <span class="js_moment"
+															title="{{comment.createdAt | date: 'yyyy-MM-dd HH:mm:ss'}}">{{comment.createdAt | date: 'yyyy-MM-dd'}}</span>
+													</small>
+												</div>
+												<div class="mb5">
+													<i class="fa ft-heart" title="Like"></i>
+													<span>{{comment.likes}}</span>
+													<span *ngIf="comment.status=='active'" class="badge badge-pill badge-success"
+														style="cursor: pointer; margin-left: 15px;"
+														(click)="onUpdatePostCommentStatus('active')">Online</span>
+													<span *ngIf="comment.status!='active'" class="badge badge-pill badge-danger"
+														style="cursor: pointer; margin-left: 15px;"
+														(click)="onUpdatePostCommentStatus('inactive')">Offline</span>
+												</div>
+											</div>
+											<div class="col-md-9">
+												<div class="form-group">
+													<p class="mb-0">{{comment.content}}</p>
+												</div>
 											</div>
 										</div>
 									</div>

@@ -34,6 +34,14 @@ export class ForumThreadsComponent {
       this.toastr.success('Combined Successfully', 'Success');
     }
   }
+  onUpdateThreadStatus(row, status) {
+    console.log('row', row);
+    if (status == 'active') {
+      console.log('active...')
+    } else {
+
+    }
+  }
 
   onSelect({ selected }) {
     this.selected.splice(0, this.selected.length);
