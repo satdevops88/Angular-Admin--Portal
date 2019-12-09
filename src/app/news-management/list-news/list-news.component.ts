@@ -1,75 +1,36 @@
-import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Apollo, QueryRef } from 'apollo-angular';
-import gql from 'graphql-tag';
-import { DatePipe } from '@angular/common';
-
-const ALLPUBLISHEDNEWS_QUERY = gql`
-  query{
-    retrieveAllPublishedNews(page:1, limit:10){
-      _id,
-      title,
-      news_summary,
-      news_content,
-      source,
-      comments,
-      created_at,
-      view_count,
-      bookmarked
-    }
-  }
-`;
+import { Component } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { DatePipe } from "@angular/common";
+import { NewsApiService } from "services/newsApi";
 
 @Component({
-  selector: 'app-list-news',
-  templateUrl: './list-news.component.html',
-  styleUrls: ['./list-news.component.scss'],
+  selector: "app-list-news",
+  templateUrl: "./list-news.component.html",
+  styleUrls: ["./list-news.component.scss"],
   providers: [DatePipe]
 })
 export class ListNewsComponent {
-
-  rows = [
-  ];
-  temp = [];
-  columns = [
-    { name: 'Index' },
-    { name: 'Title' },
-    { name: 'Author' },
-    { name: 'Categories' },
-    { name: 'Comments' },
-    { name: 'Date' },
-    { name: 'ID' },
-    { name: 'Views' },
-    { name: 'Active' },
-    { name: 'Actions' }
-  ];
+  rows = [];
+  page = {
+    totalElements: 0,
+    pageNumber: 0,
+    size: 10
+  };
+  filterVal = "";
   selected = [];
 
-  employees: any[] = [];
-  private query: QueryRef<any>;
-
-  constructor(private router: Router, private toastr: ToastrService, private apollo: Apollo, private datePipe: DatePipe) {
-
-  }
+  constructor(
+    private router: Router,
+    private toastr: ToastrService,
+    private newsApi: NewsApiService
+  ) {}
 
   ngOnInit() {
-    console.log(this.datePipe.transform(new Date(), "dd/MM/yyyy"));
-    this.query = this.apollo.watchQuery({
-      query: ALLPUBLISHEDNEWS_QUERY,
-      variables: {}
-    });
-
-    this.query.valueChanges.subscribe(result => {
-      this.rows = result.data && result.data.retrieveAllPublishedNews;
-      console.log('this.rows', this.rows);
-    });
-    this.temp = [...this.rows];
-
-
+    this.setPage({ offset: 0 });
   }
   onCreateNews() {
-    this.router.navigate(['news-management/create-news'])
+    this.router.navigate(["news-management/create-news"]);
   }
 
   onSelect({ selected }) {
@@ -78,24 +39,101 @@ export class ListNewsComponent {
   }
 
   updateFilter(event) {
-    const val = event.target.value.toLowerCase();
-    const temp = this.temp.filter(function (d) {
-      return (d.title + d.author).toLowerCase().indexOf(val) !== -1 || !val;
-    });
-    this.rows = temp;
+    this.filterVal = event.target.value.toLowerCase();
+  }
+
+  onFilter() {
+    this.setPage({ offset: 0 });
   }
 
   onUpdate(rowIndex) {
-    this.router.navigate(['news-management/update-news/' + this.rows[rowIndex].id])
+    this.router.navigate([
+      "news-management/update-news/" + this.rows[rowIndex].id
+    ]);
   }
 
-  onPublish(rowIndex) {
-    this.rows[rowIndex].active = false;
+  onUpdateNewsStatus(row, status) {
+    console.log("row", row, "status", status);
   }
 
-  onDraft(rowIndex) {
-    this.rows[rowIndex].active = true;
+  setPage(pageInfo) {
+    this.page.pageNumber = pageInfo.offset;
+    var responsePayload = [
+      "_id",
+      {
+        key: "category_id",
+        fields: [
+          "category_name",
+          "category_description",
+          {
+            key: "news_category_media",
+            fields: ["media_url", "height", "width"]
+          }
+        ]
+      },
+      "title",
+      "slug",
+      "news_summary",
+      "news_content",
+      {
+        key: "featured_media",
+        fields: ["tags", "media_url", "height", "width"]
+      },
+      {
+        key: "news_media",
+        fields: ["tags", "media_url", "height", "width"]
+      },
+      "tags",
+      "status",
+      "source",
+      "likes",
+      "dislikes",
+      "comments",
+      "bookmarked",
+      "view_count",
+      "share_count",
+      {
+        key: "created_by",
+        fields: [
+          "_id",
+          "display_name",
+          { key: "profile_image", fields: ["media_url"] }
+        ]
+      },
+      "created_at"
+    ];
+    if (this.filterVal == "") {
+      var params = { page: this.page.pageNumber + 1, limit: 10 };
+      this.newsApi
+        .getAllNews(responsePayload, params)
+        .then(result => {
+          console.log("result", result);
+          this.rows = result.data;
+          this.page.totalElements = result.meta.totalDocument;
+        })
+        .catch(error => {
+          console.log("error", error);
+          this.rows = [];
+          this.page.totalElements = 0;
+        });
+    } else {
+      var filterParams = {
+        queryString: this.filterVal,
+        page: this.page.pageNumber + 1,
+        limit: 10
+      };
+      this.newsApi
+        .filterNews(responsePayload, filterParams)
+        .then(result => {
+          console.log("result", result);
+          this.rows = result.data;
+          this.page.totalElements = result.meta.totalDocument;
+        })
+        .catch(error => {
+          console.log("error", error);
+          this.rows = [];
+          this.page.totalElements = 0;
+        });
+    }
   }
-
-
 }

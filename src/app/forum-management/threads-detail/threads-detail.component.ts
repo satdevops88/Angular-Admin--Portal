@@ -128,7 +128,6 @@ export class ThreadsDatailComponent {
   onUpdatePostCommentStatus(status: String) {}
 
   onViewComment(threadPost) {
-    console.log(threadPost);
     if (threadPost.comments > 0) {
       if (threadPost.viewComment) {
         threadPost.viewComment = false;
@@ -158,9 +157,7 @@ export class ThreadsDatailComponent {
             result.data.forEach(comment => {
               comments.push(comment);
             });
-            console.log("comment", comments);
             threadPost.commentData = comments;
-            console.log("this.threadPosts", this.threadPosts);
           });
       }
     } else {
