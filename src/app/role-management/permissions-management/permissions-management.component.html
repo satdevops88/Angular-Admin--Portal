@@ -14,27 +14,27 @@
 			</div>
 			<div class="card-body">
 				<div class="card-block">
-					<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
-						[rowHeight]="60" [footerHeight]="50" [limit]="100" [rows]="rows">
+					<ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="60"
+						[footerHeight]="50" [limit]="100" [rows]="rows">
 						<ngx-datatable-column name="Roles" [width]="600">
 							<ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
 								<div *ngIf="row.type=='title'">
-									<p class="text-bold-600 black">{{value}}</p>
+									<p class="text-bold-600 black">{{row.permission}}</p>
 								</div>
 								<div *ngIf="row.type=='content'">
-									<p style="padding-left: 30px;" class="text-bold-100 black">{{value}}</p>
+									<p style="padding-left: 30px;" class="text-bold-100 black">{{row.permission}}</p>
 								</div>
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Admin">
+						<ngx-datatable-column *ngFor="let role of roles" name="{{role.role_name}}">
 							<ng-template let-row="row" ngx-datatable-cell-template>
 								<div *ngIf="row.anonymous_admin != 'none'" style="padding-left: 15px;">
-									<input type="checkbox" [checked]="row.anonymous_admin"
+									<input type="checkbox" [checked]="row.anonymous_admin[role.role_slug]"
 										(change)="row.anonymous_admin = !row.anonymous_admin" />
 								</div>
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Moderator">
+						<!-- <ngx-datatable-column name="Moderator">
 							<ng-template let-row="row" ngx-datatable-cell-template>
 								<div *ngIf="row.authenticated_admin != 'none'" style="padding-left: 25px;">
 									<input type="checkbox" [checked]="row.authenticated_admin"
@@ -49,7 +49,7 @@
 										(change)="row.administrator = !row.administrator" />
 								</div>
 							</ng-template>
-						</ngx-datatable-column>
+						</ngx-datatable-column> -->
 					</ngx-datatable>
 				</div>
 			</div>
