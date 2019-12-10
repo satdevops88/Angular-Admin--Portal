@@ -68,4 +68,80 @@ export class NewsApiService {
         );
     });
   }
+
+  getOneNews(responsePayload: any, params: any): Promise<any> {
+    var query = this.makeRequest.makeRequest(
+      "query",
+      "retrieveNews",
+      responsePayload,
+      params
+    );
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(apiUri, { query: query }, { headers: accessToken })
+        .subscribe(
+          json => {
+            if (json["status"] == "success") {
+              resolve({
+                data: json["data"].retrieveNews
+              });
+            }
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  }
+  getNewsComments(responsePayload: any, params: any): Promise<any> {
+    var query = this.makeRequest.makeRequest(
+      "query",
+      "retrieveNewsComments",
+      responsePayload,
+      params
+    );
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(apiUri, { query: query }, { headers: accessToken })
+        .subscribe(
+          json => {
+            if (json["status"] == "success") {
+              resolve({
+                data: json["data"].retrieveNewsComments,
+                meta: json["meta"]
+              });
+            }
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  }
+
+  getNewsCommentReplies(responsePayload: any, params: any): Promise<any> {
+    var query = this.makeRequest.makeRequest(
+      "query",
+      "retrieveCommentReplies",
+      responsePayload,
+      params
+    );
+    return new Promise((resolve, reject) => {
+      this.http
+        .post(apiUri, { query: query }, { headers: accessToken })
+        .subscribe(
+          json => {
+            if (json["status"] == "success") {
+              resolve({
+                data: json["data"].retrieveCommentReplies,
+                meta: json["meta"]
+              });
+            }
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  }
 }

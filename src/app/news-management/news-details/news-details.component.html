@@ -9,10 +9,9 @@
 	<div class="row">
 		<div class="col-sm-1"> </div>
 		<div class="col-sm-10">
-			<div class="card">
+			<div *ngIf="newsInfo" class="card">
 				<div class="card-header">
-					<p class="mb-0">Local / Buhari, Obasanjo meet, shake hands, as President presides over National Council of
-						State [PHOTOS]</p>
+					<p class="mb-0">{{newsInfo.category_id.category_name}}</p>
 				</div>
 				<div class="card-body">
 					<div class="card-block">
@@ -22,85 +21,37 @@
 									<div class="px-3">
 										<form class="form" #f="ngForm">
 											<div class="form-body">
-												<h4 class="form-section"><i class="ft-file-text"></i> News Content</h4>
+												<h4 class="form-section"><i class="ft-file-text"></i>{{newsInfo.title}}</h4>
 												<div class="row">
 													<div class="col-md-2" style="text-align: center;">
 														<a href="javascript:;">
-															<img _ngcontent-c7="" alt="user" class="rounded-circle"
-																src="/assets/img/portrait/medium/avatar-m-10.png" width="80">
+															<img alt="user" class="rounded-circle" src="{{newsInfo.created_by}}" width="80">
 														</a>
-														<h6 class="mt10"> <a href="javascript:;">Defiant America</a> </h6>
-														<div class="mb5"> <i class="fa fa-user"></i> Member</div>
-														<div> <small>Joined: <span class="js_moment" data-time="2019-08-06 10:28:29"
-																	title="Tuesday, August 6, 2019 6:28 pm">3 months ago</span></small> </div>
+														<h6 class="mt10"> <a href="javascript:;">{{newsInfo.created_by}}</a> </h6>
+														<div class="mb5">
+															<i class="fa ft-thumbs-up" title="Like"></i> {{newsInfo.likes}}
+															<i class="fa ft-thumbs-down" title="Dislike" style="margin-left: 10px;"></i>
+															{{newsInfo.dislikes}}
+															<i class="fa ft-eye" title="View" style="margin-left: 10px;"></i> {{newsInfo.view_count}}
+															<i class="fa ft-share-2" title="Share" style="margin-left: 10px;"></i>
+															{{newsInfo.share_count}}
+														</div>
+														<div>
+															<small>Created: <span class="js_moment"
+																	title="{{newsInfo.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}">{{newsInfo.created_at | date: 'yyyy-MM-dd'}}</span>
+															</small>
+														</div>
 													</div>
 													<div class="col-md-10">
 														<div class="form-group">
-															<p class="mb-0">President Muhammadu Buhari is currently presiding over the National
-																Council of State meeting at the Presidential Villa, Abuja.
+															<div class="mb-0" [innerHTML]="news_summary"></div>
+															<div class="row">
+																<div *ngFor="let media of newsInfo.news_media" class="col-md-6">
+																	<img src="{{media.media_url}}" alt="" width="100%" />
+																</div>
+															</div>
+															<div class="mb-0" [innerHTML]="news_content"></div>
 
-																The Council of State is an organ of the Federal Government saddled with the
-																responsibility of advising the executive on policy making.
-
-																The meeting which is being held inside the Council Chambers began at 11:00am.
-																President Muhammadu Buhari is currently presiding over the National Council of State
-																meeting at the Presidential Villa, Abuja.
-															</p>
-															<p>
-																<img src="https://talkofnaija.com/wp-content/uploads/2019/01/obj-buha-shake-hands3.jpg"
-																	alt="Liberal will always be crying babies becasue they can't accept reality."
-																	width="480" height="400" />
-															</p>
-															<p>
-																The Council of State is an organ of the Federal Government saddled with the
-																responsibility of advising the executive on policy making.
-
-																The meeting which is being held inside the Council Chambers began at 11:00am.
-
-																The Secretary-General of the Federation, SGF Boss Mustapha said apologies were sent from
-																Fmr Head Of State, Yakubu Gowon, IBB, for not attending the meeting.
-
-																The council comprising president as chairman and vice president as deputy chairman, has
-																as members all former presidents and Heads of State, all former Chief Justices of
-																Nigeria, President of the Senate, Speaker of the House of Representatives, all state
-																governors and Attorney-General of the Federation as members.
-
-																Without mentioning details of the agenda during the opening session, the Secretary to
-																the Government of the Federations, Boss Mustapha said that the meeting will discuss
-																five-point agenda.
-																President Muhammadu Buhari is currently presiding over the National Council of State
-																meeting at the Presidential Villa, Abuja.
-
-																The Council of State is an organ of the Federal Government saddled with the
-																responsibility of advising the executive on policy making.
-
-																The meeting which is being held inside the Council Chambers began at 11:00am.
-
-																The Secretary-General of the Federation, SGF Boss Mustapha said apologies were sent from
-																Fmr Head Of State, Yakubu Gowon, IBB, for not attending the meeting.
-
-																The council comprising president as chairman and vice president as deputy chairman, has
-																as members all former presidents and Heads of State, all former Chief Justices of
-																Nigeria, President of the Senate, Speaker of the House of Representatives, all state
-																governors and Attorney-General of the Federation as members.
-
-																Without mentioning details of the agenda during the opening session, the Secretary to
-																the Government of the Federations, Boss Mustapha said that the meeting will discuss
-																five-point agenda.
-
-																Issues expected to be considered at the meeting include the National minimum wage, and
-																confirmation of the appointment of the Acting Inspector General of Police, Mohammed
-																Adamu.
-
-																The forthcoming general election and security of the nation are also expected to engage
-																the attention of the Council of State.
-
-																Former President, Olusegun Obasanjo and President Muhammadu Buhari also met and shook
-																hands before the commencement of the meeting.
-
-																This is barely 24 hours after the former President released a statement condemning the
-																Buhari administration.
-															</p>
 														</div>
 													</div>
 												</div>
@@ -118,57 +69,79 @@
 					</div>
 				</div>
 			</div>
-			<div class="card">
+			<div *ngFor="let comment of newsComments" class="card">
 				<div class="card-body">
-					<div class="card-block">
+					<div class="card-block" style="padding-top: 20px;">
 						<div class="px-3">
 							<form class="form" #f="ngForm">
 								<div class="form-body">
-									<h4 class="form-section"><i class="ft-file-text"></i> Comment</h4>
 									<div class="row">
 										<div class="col-md-2" style="text-align: center;">
 											<a href="javascript:;">
 												<img _ngcontent-c7="" alt="user" class="rounded-circle"
-													src="/assets/img/portrait/medium/avatar-m-7.png" width="80">
+													src="{{comment.created_by.profile_image.media_url}}" width="80">
 											</a>
-											<h6 class="mt10"> <a href="javascript:;">Cliff Clarke</a> </h6>
-											<div class="mb5"> <i class="fa fa-user"></i> Member</div>
-											<div> <small>Joined: <span class="js_moment" data-time="2019-08-07 22:36:45"
-														title="Tuesday, August 6, 2019 6:28 pm">3 months ago</span></small> </div>
+											<h6 class="mt10"> <a href="javascript:;">{{comment.created_by.display_name}}</a> </h6>
+											<div>
+												<small>Created: <span class="js_moment"
+														title="{{comment.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}">{{comment.created_at | date: 'yyyy-MM-dd'}}</span>
+												</small>
+											</div>
+											<div class="mb5">
+												<i class="fa ft-thumbs-up" title="Like"></i> {{comment.likes}}
+												<i class="fa ft-thumbs-down" title="Dislike" style="margin-left: 10px;"></i>
+												{{comment.dislikes}}
+												<span *ngIf="comment.status=='online'" class="badge badge-pill badge-success"
+													style="cursor: pointer; margin-left: 15px;"
+													(click)="onUpdateCommentStatus('online')">Online</span>
+												<span *ngIf="comment.status!='online'" class="badge badge-pill badge-danger"
+													style="cursor: pointer; margin-left: 15px;"
+													(click)="onUpdateCommentStatus('offline')">Offline</span>
+											</div>
+											<div class="mb5">
+												<i class="fa ft-message-square" title="Replies"></i> {{comment.replies}}
+												<span class="badge badge-pill badge-secondary" style="cursor: pointer;"
+													(click)="onViewReplies(comment)">View Replies</span>
+											</div>
 										</div>
 										<div class="col-md-10">
 											<div class="form-group">
-												<p class="mb-0">You are absolutely right.🤣🤣</p>
+												<p class="mb-0">{{comment.comment_content}}</p>
 											</div>
 										</div>
 									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-body">
-					<div class="card-block">
-						<div class="px-3">
-							<form class="form" #f="ngForm">
-								<div class="form-body">
-									<h4 class="form-section"><i class="ft-file-text"></i> Comment Reply</h4>
-									<div class="row">
-										<div class="col-md-2" style="text-align: center;">
-											<a href="javascript:;">
-												<img _ngcontent-c7="" alt="user" class="rounded-circle"
-													src="/assets/img/portrait/medium/avatar-m-5.png" width="80">
-											</a>
-											<h6 class="mt10"> <a href="javascript:;">Siboy Siboy</a> </h6>
-											<div class="mb5"> <i class="fa fa-user"></i> Member</div>
-											<div> <small>Joined: <span class="js_moment" data-time="2019-08-07 22:36:45"
-														title="Tuesday, August 6, 2019 6:28 pm">3 months ago</span></small> </div>
-										</div>
-										<div class="col-md-10">
-											<div class="form-group">
-												<p class="mb-0">shit...</p>
+									<!-- Replies -->
+									<div *ngIf="comment.viewReplies" style="border-top: 1px solid #d3dce9; margin-top: 10px;">
+										<div *ngFor="let reply of comment.repliesData" class="row" style="margin-top: 15px;">
+											<div class="col-md-1">
+											</div>
+											<div class="col-md-2" style="text-align: center;">
+												<a href="javascript:;">
+													<img _ngcontent-c7="" alt="user" class="rounded-circle"
+														src="{{reply.created_by.profile_image.media_url}}" width="50">
+												</a>
+												<h6 class="mt10"> <a href="javascript:;">{{reply.created_by.display_name}}</a> </h6>
+												<div>
+													<small>Created: <span class="js_moment"
+															title="{{reply.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}">{{reply.created_at | date: 'yyyy-MM-dd'}}</span>
+													</small>
+												</div>
+												<div class="mb5">
+													<i class="fa ft-thumbs-up" title="Like"></i> {{reply.likes}}
+													<i class="fa ft-thumbs-down" title="Dislike" style="margin-left: 10px;"></i>
+													{{reply.dislikes}}
+													<span *ngIf="reply.status=='online'" class="badge badge-pill badge-success"
+														style="cursor: pointer; margin-left: 15px;"
+														(click)="onUpdateCommentRepliesStatus('online')">Online</span>
+													<span *ngIf="reply.status!='online'" class="badge badge-pill badge-danger"
+														style="cursor: pointer; margin-left: 15px;"
+														(click)="onUpdateCommentRepliesStatus('offline')">Offline</span>
+												</div>
+											</div>
+											<div class="col-md-9">
+												<div class="form-group">
+													<p class="mb-0">{{reply.reply_content}}</p>
+												</div>
 											</div>
 										</div>
 									</div>
