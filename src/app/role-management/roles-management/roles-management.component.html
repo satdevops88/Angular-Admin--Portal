@@ -10,28 +10,37 @@
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-header" style="display: flex;">
-				<input type="text" style="padding:5px;margin:15px;width:30%;" placeholder="Type to filter the Role ..."
-					(keyup)="updateFilter($event)" />
+				<!-- <input type="text" style="padding:5px;margin:15px;width:30%;" placeholder="Type to filter the Role ..."
+					(keyup)="updateFilter($event)" /> -->
 				<button type="button" class="btn btn-primary btn-round btn-raised" style="margin-top: 15px;"
 					(click)="onCreateRole()"> Create Roles</button>
 			</div>
 			<div class="card-body">
 				<div class="card-block">
-					<ngx-datatable class="material" [columns]="columns" [columnMode]="'force'" [headerHeight]="50"
-						[rowHeight]="60" [footerHeight]="50" [limit]="10" [rows]="rows" [selected]="selected"
-						[selectionType]="'checkbox'" (select)="onSelect($event)">
+					<ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [rowHeight]="60"
+						[footerHeight]="50" [rows]="rows" [externalPaging]="true" [count]="page.totalElements"
+						[offset]="page.pageNumber" [limit]="page.size" (page)="setPage($event)">
 						<ngx-datatable-column name="ID">
 							<ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-								{{rowIndex + 1}}
+								{{page.pageNumber * 10 + rowIndex + 1}}
 							</ng-template>
 						</ngx-datatable-column>
-						<ngx-datatable-column name="Roles"> </ngx-datatable-column>
+						<ngx-datatable-column name="Roles">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.role_name}}
+							</ng-template>
+						</ngx-datatable-column>
+						<ngx-datatable-column name="CreatedAt">
+							<ng-template let-row="row" ngx-datatable-cell-template>
+								{{row.created_at | date: 'dd/MM/yyyy'}}
+							</ng-template>
+						</ngx-datatable-column>
 						<ngx-datatable-column name="Actions">
-							<ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+							<ng-template let-row="row" ngx-datatable-cell-template>
 								<button type="button" class="btn btn-outline-primary btn-round" style="margin-left: 10px;"
-									(click)="onUpdateRole(rowIndex)">Update</button>
+									(click)="onUpdateRole(row)">Update</button>
 								<button type="button" class="btn btn-outline-danger btn-round" style="margin-left: 10px;"
-									(click)="onDeleteRole(rowIndex)">Delete</button>
+									(click)="onDeleteRole(row)">Delete</button>
 							</ng-template>
 						</ngx-datatable-column>
 					</ngx-datatable>

@@ -1,57 +1,79 @@
-import { Component } from '@angular/core';
-import { ApiService } from 'app/shared/api/api.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { Component } from "@angular/core";
+import { ApiService } from "app/shared/api/api.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { RoleApiService } from "services/roleApi";
 
 @Component({
-  selector: 'app-roles-management',
-  templateUrl: './roles-management.component.html',
-  styleUrls: ['./roles-management.component.scss']
+  selector: "app-roles-management",
+  templateUrl: "./roles-management.component.html",
+  styleUrls: ["./roles-management.component.scss"]
 })
 export class RolesManagementComponent {
+  rows = [];
+  page = {
+    totalElements: 0,
+    pageNumber: 0,
+    size: 10
+  };
+  filterVal = "";
 
-  rows = [
-    { roles: "Admin" },
-    { roles: "Moderator" },
-    { roles: "Admin User" }
-  ];
-  temp = [];
-  columns = [
-    { name: 'ID' },
-    { name: 'Roles' },
-    { name: 'Actions' }
-  ];
-  selected = [];
-  constructor(private toastr: ToastrService, private router: Router, private route: ActivatedRoute) {
-
-  }
+  constructor(
+    private toastr: ToastrService,
+    private router: Router,
+    private roleApi: RoleApiService
+  ) {}
 
   ngOnInit() {
-    this.temp = [...this.rows];
+    this.setPage({ offset: 0 });
   }
 
-  onSelect({ selected }) {
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
+  onDeleteRole(row) {
+    if (confirm('Are you sure to delete "' + row.role_name + '" Role ?')) {
+      var responsePayload = [
+        "_id",
+        "role_name",
+        "role_slug",
+        "role_permission",
+        "created_at"
+      ];
+      var params = { id: row._id };
+      this.roleApi.deleteRole(responsePayload, params).then(result => {
+        this.toastr.success("Deleted Successfully", "Success");
+        this.setPage({ offset: 0 });
+      });
+    }
   }
 
-  updateFilter(event) {
-    const val = event.target.value.toLowerCase();
-    const temp = this.temp.filter(function (d) {
-      return d.roles.toLowerCase().indexOf(val) !== -1 || !val;
-    });
-    this.rows = temp;
-  }
-
-  onDeleteRole(rowIndex) {
-    this.toastr.success("Deleted Successfully", "Success");
-  }
-
-  onUpdateRole(rowIndex) {
-    this.router.navigate(['role-management/update-role/2']);
+  onUpdateRole(row) {
+    this.router.navigate(["role-management/update-role/", row._id]);
   }
 
   onCreateRole() {
-    this.router.navigate(['role-management/create-role']);
+    this.router.navigate(["role-management/create-role"]);
+  }
+
+  setPage(pageInfo) {
+    this.page.pageNumber = pageInfo.offset;
+    var responsePayload = [
+      "_id",
+      "role_name",
+      "role_slug",
+      "role_permission",
+      "created_at"
+    ];
+    var params = null;
+    this.roleApi
+      .getAllRoles(responsePayload, params)
+      .then(result => {
+        console.log("result", result);
+        this.rows = result.data;
+        this.page.totalElements = result.meta.totalDocument;
+      })
+      .catch(error => {
+        console.log("error", error);
+        this.rows = [];
+        this.page.totalElements = 0;
+      });
   }
 }
